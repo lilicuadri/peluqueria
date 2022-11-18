@@ -1,0 +1,37 @@
+{
+  "name": "api_nomina",
+  "version": "1.0.0",
+  "description": "Nomina API",
+  "main": "src/index.js",
+  "engines": {
+    "node": "12.16.3"
+  },
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "RLEP",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.24.0",
+    "bluebird": "^3.5.3",
+    "body-parser": "1.18.3",
+    "btoa": "^1.2.1",
+    "debug": "^4.1.1",
+    "express": "^4.17.1",
+    "file-system": "^2.2.2",
+    "html-pdf": "^3.0.1",
+    "joi": "13.4.0",
+    "moment": "^2.24.0",
+    "mongoose": "^5.9.3",
+    "mongoose-double": "0.0.1",
+    "multer": "^1.4.2",
+    "newrelic": "^6.14.0",
+    "nodemailer": "^6.7.1",
+    "path": "^0.12.7",
+    "pdf-to-base64": "^1.0.3",
+    "qrcode": "^1.4.4",
+    "uuid": "^3.3.2"
+  },
+  "devDependencies": {}
+}
