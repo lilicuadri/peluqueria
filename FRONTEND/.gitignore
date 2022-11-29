@@ -2,7 +2,7 @@
 
 # dependencies
 /node_modules
-.DS_Store
+/.yarn
 
 # testing
 /coverage
@@ -16,12 +16,21 @@
 .env.development.local
 .env.test.local
 .env.production.local
+.eslintcache
+
+/.idea
+/.vscode
+
+/src/styles/tailwind.css
 
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-package-lock.json
-yarn.lock
-
-commit.sh
+.yarn/*
+!.yarn/patches
+!.yarn/releases
+!.yarn/plugins
+!.yarn/sdks
+!.yarn/versions
+.pnp.*

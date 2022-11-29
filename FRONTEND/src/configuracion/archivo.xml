@@ -1,0 +1,54 @@
+<NominaIndividual xsi:schemaLocation="dian:gov:co:facturaelectronica:NominaIndividual NominaIndividualElectronicaXSD.xsd" SchemaLocation="" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xades141="http://uri.etsi.org/01903/v1.4.1#" xmlns:xades="http://uri.etsi.org/01903/v1.3.2#" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xmlns="dian:gov:co:facturaelectronica:NominaIndividual">
+
+<ext:UBLExtensions> </ext:UBLExtensions>
+
+<Novedad CUNENov="">false</Novedad>
+
+<Periodo FechaGen="2021-11-02" TiempoLaborado="318" FechaLiquidacionFin="2021-10-30" FechaLiquidacionInicio="2021-10-01" FechaIngreso="2020-12-14"/>
+
+<NumeroSecuenciaXML Numero="DSNE259" Consecutivo="259" Prefijo="DSNE" CodigoTrabajador="1197"/>
+
+<LugarGeneracionXML Idioma="es" MunicipioCiudad="13001" DepartamentoEstado="13" Pais="CO"/>
+
+<InformacionGeneral FechaGen="2021-11-10" TipoMoneda="COP" PeriodoNomina="5" HoraGen="15:27:19-05:00" EncripCUNE="" CUNE="" TipoXML="102" Ambiente="1" Version="V1.0: Documento Soporte de Pago de Nómina Electrónica"/>
+
+<Notas>""</Notas>
+
+<Empleador MunicipioCiudad="13001" DepartamentoEstado="13" Pais="CO" Direccion="PIE DEL CERRO CL 30 18 A 04" DV="1" NIT="890403068" RazonSocial="VEHICULOS DE LA COSTA S.A.S"/>
+
+<Trabajador CodigoTrabajador="1197" Sueldo="1122100.0" TipoContrato="2" SalarioIntegral="false" LugarTrabajoDireccion="PIE DEL CERRO CL 30 18 A 04" LugarTrabajoMunicipioCiudad="13001" LugarTrabajoDepartamentoEstado="13" LugarTrabajoPais="CO" OtrosNombres=" DE JESUS" PrimerNombre="DARIO" SegundoApellido=" URQUIZA" PrimerApellido="DIAZ" NumeroDocumento="7920413" TipoDocumento="13" AltoRiesgoPension="false" SubTipoTrabajador="00" TipoTrabajador="01"/>
+
+<Pago NumeroCuenta="488417996532" TipoCuenta="Ahorros" Banco="BANCO DAVIVIENDA CTA CTE 56069997890" Metodo="2" Forma="1"/>
+
+
+-<FechasPagos>
+
+<FechaPago>2021-10-30</FechaPago>
+
+</FechasPagos>
+
+
+-<Devengados>
+
+<Basico SueldoTrabajado="1122100.00" DiasTrabajados="30"/>
+
+<Transporte AuxilioTransporte="106454"/>
+
+</Devengados>
+
+
+-<Deducciones>
+
+<Salud Deduccion="44884" Porcentaje="4"/>
+
+<FondoPension Deduccion="44884" Porcentaje="4"/>
+
+</Deducciones>
+
+<DevengadosTotal>1228554.00</DevengadosTotal>
+
+<DeduccionesTotal>89768.00</DeduccionesTotal>
+
+<ComprobanteTotal>1138786.00</ComprobanteTotal>
+
+</NominaIndividual>

@@ -2,10 +2,13 @@ const mongoose = require('mongoose');
 const schema = mongoose.Schema;
 
 const rolSchema = schema({
- 	Codigo_Servicio: String,
-    Nombre_Servicio: String,
+ 	Codigo: String,
+    Nombre: String,
     Precio: String,
     detalle_servicio: String,
+    tipo_Servicio: String,
+    imagen: String,
+    
     Nit_Peluqueria: String
 });
 
