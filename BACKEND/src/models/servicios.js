@@ -8,7 +8,7 @@ const rolSchema = schema({
     detalle_servicio: String,
     tipo_Servicio: String,
     imagen: String,
-    
+    Empresa: String,
     Nit_Peluqueria: String
 });
 

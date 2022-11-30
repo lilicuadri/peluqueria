@@ -37,7 +37,7 @@ const rows = [
     },
      {
         id: 'Valor',
-        align: 'left',
+        align: 'right',
         disablePadding: false,
         label: 'Valor',
         sort: true
@@ -190,19 +190,19 @@ function ProductsTable(props) {
                                             selected={isSelected}
                                         >
                                             <TableCell component="th" scope="row">
-                                                {n.Codigo}{"-"}{n.Codigo}
+                                                {n.Codigo}
                                             </TableCell>
                                             <TableCell component="th" scope="row">
                                                 {n.Nombre}
                                             </TableCell>
                                             <TableCell component="th" scope="row">
-                                                {n.Descripcion}
+                                                {n.detalle_servicio}
                                             </TableCell>
                                             <TableCell component="th" scope="row" align="right">
-                                                {n.Valor}
+                                                {n.Precio}
                                             </TableCell>
-                                            <TableCell component="th" scope="row" align="right">
-                                                {n.TipoServicio}
+                                            <TableCell component="th" scope="row" >
+                                                {n.tipo_Servicio}
                                             </TableCell>
                                             <TableCell component="th" scope="row" align="right">
                                                 {n.Imagen}

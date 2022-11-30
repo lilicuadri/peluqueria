@@ -61,14 +61,11 @@ class DemoServicio extends React.Component {
         ObjUServicio.IdServicio = this.state.IdServicio;
         ObjUServicio.Codigo = this.state.Codigo;
         ObjUServicio.Nombre = this.state.Nombre;
-        ObjUServicio.detalle_servicio = this.state.Descripcion;
-        ObjUServicio.Precio = this.state.Valor;
-        ObjUServicio.tipo_Servicio = this.state.TipoServicio;
+        ObjUServicio.detalle_servicio = this.state.detalle_servicio;
+        ObjUServicio.Precio = this.state.Precio;
+        ObjUServicio.tipo_Servicio = this.state.tipo_Servicio;
         ObjUServicio.imagen = this.state.Imagen;
-        ObjUServicio.SegundoApellido = this.state.SegundoApellido;
         ObjUServicio.Empresa = Empresa;
-        //ObjUServicio.Filtro = this.state.TipoIdentificacion + " - " + this.state.Identificacion + " " + this.state.PrimerNombre + " " + this.state.SegundoNombre + " " + this.state.PrimerApellido + " " + this.state.SegundoApellido;
-        //ObjUServicio.NombreCompleto = this.state.PrimerNombre + " " + this.state.SegundoNombre + " " + this.state.PrimerApellido + " " + this.state.SegundoApellido;
 
         let Action = null;
         if (this.props.data._id) {
@@ -89,10 +86,14 @@ class DemoServicio extends React.Component {
             .then(res => res.json())
             .then(data => data)
             .then(data => {
-                if(data.datos.Error === false){
+                if (data.datos.length > 0) {
                     this.props.MostrarFormulario('Cargar');
                     toast.success("Datos Guardado");
-                } 
+                } else {
+                    this.props.MostrarFormulario('Cargar');
+                    toast.error("Error al guardado el servicio");
+                }
+
             })
             .catch(err => console.log('err', err));
     };
@@ -168,147 +169,83 @@ class DemoServicio extends React.Component {
                         />}
 
                     content={
+                        <>
+                            <div className="ventana">
+                                <Formsy className="flex flex-col justify-center">
+                                    <ModalBody>
+                                        <div className="cardbody">
+                                            <div className="p-10">
 
-                        <div className="ventana">
-                            <Formsy  className="flex flex-col justify-center w-full">
-                                <div>
-                                    <CardBody className="cardbody my-5 mx-4">
-                                        <form>
-                                            <ModalBody>
-                                                <div className="borde">
-                                                    <div className="p-10">
-                                                        <div className="flex -mx-4">
-                                                            <div className="min-w-50 pt-20">
-                                                                <Icon color="action">security</Icon>
-                                                            </div>
-                                                            <TextField
-                                                                className="mt-8 mb-16 mx-4"
-                                                                id="outlined-basic"
-                                                                label="Codigo"
-                                                                name= "Codigo"
-                                                                //variant="outlined"
-                                                                type="number"
-                                                                value={this.state.Codigo}
-                                                                onChange={this.onInputchange}
-                                                                InputLabelProps={{
-                                                                    shrink: true,
-                                                                }}
-                                                                 validations={{
-                                                                            minLength: 1
-                                                                        }}
-                                                                        validationErrors={{
-                                                                            minLength:
-                                                                                'El numero de caracteres minimos es de: 1'
-                                                                        }}
-                                                            />
-                                                             <div className="min-w-50 pt-20">
-                                                                        <Icon color="action">account_circle</Icon>
-                                                                    </div>
-                                                             <TextField
-                                                                        className="mt-8 mb-16 mx-4"
-                                                                        type="text"
-                                                                        name="Nombre"
-                                                                        value={this.state.Nombre}
-                                                                        label="Nombre"
-                                                                        onChange={this.onInputchange}
-                                                                
-                                                                        variant="outlined"
-                                                                        /* InputLabelProps={{
-                                                                            shrink: true
-                                                                        }} */
+                                                <div className="flex col-md-6 -mx-4">
+                                                    <TextField
+                                                        className="mt-8 mb-16 col-md-6 mx-4"
+                                                        type="text"
+                                                        name="Codigo"
+                                                        fullWidth
+                                                        value={this.state.Codigo}
+                                                        onChange={this.onInputchange}
+                                                        label="Código"
+                                                        variant="outlined"
+                                                        required
 
-                                                                          
+                                                    />
+                                                    <TextField
+                                                        className="mt-8 mb-16 mx-4"
+                                                        type="text"
+                                                        name="Nombre"
+                                                        fullWidth
+                                                        value={this.state.Nombre}
+                                                        onChange={this.onInputchange}
+                                                        label="Nombre"
+                                                        variant="outlined"
+                                                        required
 
-                                                                    />
-                                                                
-                                                        </div>
-                                                 
-                                                       
-                                                        <div className="flex -mx-4">
-                                                            <TextField
-                                                                className="mt-8 mb-16 mx-4"
-                                                                id="outlined-multiline-static"
-                                                                label="Descripción"
-                                                                name="Descripcion"
-                                                                value={this.state.Descripcion}
-                                                                multiline
-                                                                fullWidth
-                                                                onChange={this.onInputchange}
-                                                                rows={4}
-                                                            />
-
-                                                          
-
-                                                        </div>
-                                                        <div className="flex -mx-4">
-                                                           
-                                                        
-                                                            <TextField
-                                                                className="mt-8 mb-16 mx-4"
-                                                                type="number"
-
-                                                                name="Valor"
-                                                                label="Valor"
-                                                                value={this.state.Valor}
-                                                                onChange={this.onInputchange}
-                                                                validations={{
-                                                                    minLength: 4
-                                                                }}
-                                                                validationErrors={{
-                                                                    minLength: 'El numero de caracteres minimos es de 4'
-                                                                }}
-                                                                variant="outlined"
-                                                                required
-                                                            /*  InputLabelProps={{
-                                                                 shrink: true
-                                                             }} */
-
-                                                            />
-                                                            <div className="flex -mx-4">
-                                                                <div className="min-w-50 pt-20">
-                                                                    <Icon color="action">person</Icon>
-                                                                </div>
-                                                                
-                                                                <FormControl sx={{ m: 1, width: 600 }}>
-                                                                    <InputLabel id="demo-simple-select-helper-label">Tipo de Servicio</InputLabel>
-                                                                <Select
-                                                                    labelId="demo-simple-select-helper-label"
-                                                                    id="demo-simple-select-helper"
-                                                                    value={this.state.TipoServicio }
-                                                                    name="TipoServicio"
-                                                                        label="Tipo de Servicio"
-                                                                        
-                                                                    onChange={this.onInputchange}
-                                                                    fullWidth
-                                                                >
-                                                                    <MenuItem value="CC">NIÑA</MenuItem>
-                                                                    <MenuItem value="NIT">NIÑO</MenuItem>
-                                                                    <MenuItem value="NIT">HOMBRE</MenuItem>
-                                                                    <MenuItem value="NIT">MUJER</MenuItem>
-                                                                        
-                                                                </Select>
-                                                                 </FormControl>
-
-                                                            </div>
-
-                                                        </div>
-                                                        
-                                                        
-                                                            <div className="row">
-                                                                <input
-                                                                value={this.state.Imagen}
-                                                                type="file" />
-                                                            </div>
-
-                                                    </div>
+                                                    />
                                                 </div>
-                                            </ModalBody>
-                                        </form>
-                                    </CardBody>
-                                </div>
-                            </Formsy>
+                                                <div className="flex col-md-6 -mx-4">
+                                                    <TextField
+                                                        className="mt-8 mb-16 col-md-6 mx-4"
+                                                        type="text"
+                                                        name="tipo_Servicio"
+                                                        fullWidth
+                                                        value={this.state.tipo_Servicio}
+                                                        onChange={this.onInputchange}
+                                                        label="Tipo Servicio"
+                                                        variant="outlined"
+                                                        required
+                                                    />
+                                                    <TextField
+                                                        className="mt-8 mb-16 mx-4"
+                                                        type="number"
+                                                        name="Precio"
+                                                        fullWidth
+                                                        value={this.state.Precio}
+                                                        onChange={this.onInputchange}
+                                                        label="Precio"
+                                                        variant="outlined"
+                                                        required
+                                                    />
+                                                </div>
+                                                <div className="flex  -mx-4">
+                                                    <TextField
+                                                        className="mt-8 mb-16 mx-4"
+                                                        type="text"
+                                                        name="detalle_servicio"
+                                                        fullWidth
+                                                        value={this.state.detalle_servicio}
+                                                        onChange={this.onInputchange}
+                                                        label="Detalle Servicio"
+                                                        variant="outlined"
+                                                        required
+                                                    />
 
-                        </div >
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </ModalBody>
+                                </Formsy>
+                            </div>
+                        </>
                     }
                 />
             </>

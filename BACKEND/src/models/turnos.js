@@ -3,15 +3,12 @@ const mongoose = require('mongoose');
 const schema = mongoose.Schema;
 
 const rolSchema = schema({
-    Codigo_Turno: String,
+    Codigo_Servicio: String,
     Nombre_Servicio: String,
     Precio: String,
-    Codigo_Servicio : String,
+    Codigo: String,
     Fecha: Date,
-    Hora: String, 
-
-
-
+    Hora: String,  
 });
 
 const rol = mongoose.model('turnos', rolSchema);
