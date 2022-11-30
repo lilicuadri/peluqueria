@@ -65,6 +65,8 @@ class DemoServicio extends React.Component {
         ObjUServicio.Precio = this.state.Precio;
         ObjUServicio.tipo_Servicio = this.state.tipo_Servicio;
         ObjUServicio.imagen = this.state.Imagen;
+        ObjUServicio.genero = this.state.genero;
+        ObjUServicio.duracion = this.state.duracion;
         ObjUServicio.Empresa = Empresa;
 
         let Action = null;
@@ -239,6 +241,32 @@ class DemoServicio extends React.Component {
                                                         required
                                                     />
 
+                                                </div>
+                                                <div className="flex col-md-6 -mx-4">
+                                                    <TextField
+                                                        className="mt-8 mb-16 col-md-6 mx-4"
+                                                        type="text"
+                                                        name="genero"
+                                                        fullWidth
+                                                        value={this.state.genero}
+                                                        onChange={this.onInputchange}
+                                                        label="Genero"
+                                                        variant="outlined"
+                                                        required
+
+                                                    />
+                                                    <TextField
+                                                        className="mt-8 mb-16 mx-4"
+                                                        type="text"
+                                                        name="duracion"
+                                                        fullWidth
+                                                        value={this.state.duracion}
+                                                        onChange={this.onInputchange}
+                                                        label="Duración"
+                                                        variant="outlined"
+                                                        required
+
+                                                    />
                                                 </div>
                                             </div>
                                         </div>

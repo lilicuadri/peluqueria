@@ -14,6 +14,7 @@ import { Link } from 'react-router-dom';
 import * as yup from 'yup';
 import _ from '@lodash';
 import FirebaseLoginTab from './FirebaseLoginTab';
+import Header from './header'
 /**
  * Validamos la informacion
  */
@@ -23,7 +24,9 @@ const Login = props => {
 
   return (
     <div className="flex flex-col flex-auto p-16 sm:p-24 md:flex-row md:p-0 overflow-hidden">
-      <div className="flex flex-col flex-grow-0 items-center p-16 text-center md:p-128 md:items-start md:flex-shrink-0 md:flex-1 md:text-left">
+      <div className="flex flex-col flex-grow-0 items-center p-16 text-center md:p-128 md:items-start md:flex-shrink-0 md:flex-1 md:text-left"
+      >
+      
         <motion.div
           initial={{ opacity: 0, scale: 0.6 }}
           animate={{ opacity: 1, scale: 1, transition: { delay: 0.1 } }}
@@ -37,13 +40,13 @@ const Login = props => {
           animate={{ opacity: 1, y: 0, transition: { delay: 0.2 } }}
         >
           <Typography className="text-32 sm:text-44 font-semibold leading-tight">
-            Gestión Salud!
+            Peluqueria Saloom 
           </Typography>
         </motion.div>
 
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1, transition: { delay: 0.3 } }}>
           <Typography variant="subtitle1" className="mt-32 font-medium">
-          Tu sistema ideal para gestión de recursos humanos y nómina electrónica.
+          Tu sistema ideal para tener un servicio adecuado.
           </Typography>
         </motion.div>
       </div>

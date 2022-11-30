@@ -49,6 +49,21 @@ const rows = [
         label: 'Tipo',
         sort: true
     },
+    
+      {
+        id: 'Genero',
+        align: 'left',
+        disablePadding: false,
+        label: 'Genero',
+        sort: true
+    },
+        {
+        id: 'Duracion',
+        align: 'left',
+        disablePadding: false,
+        label: 'Duración',
+        sort: true
+    },
     {
         id: 'Imagen',
         align: 'right',
@@ -205,7 +220,13 @@ function ProductsTable(props) {
                                                 {n.tipo_Servicio}
                                             </TableCell>
                                             <TableCell component="th" scope="row" align="right">
-                                                {n.Imagen}
+                                                {n.genero}
+                                            </TableCell>
+                                            <TableCell component="th" scope="row" align="right">
+                                                {n.duracion}
+                                            </TableCell>
+                                            <TableCell component="th" scope="row" align="right">
+                                                {n.imagen}
                                             </TableCell>
                                         </TableRow>
                                     );

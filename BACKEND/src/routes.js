@@ -19,7 +19,9 @@ module.exports = () => {
     const divisionesController = require('./controllers/divisiones');
     const periodoController = require('./controllers/periodo'); 
     const turnosController = require('./controllers/turnos');
-    const serviciosController = require('./controllers/servicios')
+    const serviciosController = require('./controllers/servicios');
+    const peluqueriasController = require('./controllers/peluquerias')
+    
 
     //divisionPolitica
     requestsRouter.get('/municipios/:key/:value', divisionPoliticaController.findMunicipios);
@@ -33,9 +35,9 @@ module.exports = () => {
     requestsRouter.get('/barrios/', divisionPoliticaController.searchBarrios);
 
     //peluquerias
-   /* requestsRouter.get('/peluquerias/:key/:value', peluqueriasController.buscar);
+   requestsRouter.get('/peluquerias/:key/:value', peluqueriasController.buscar);
     requestsRouter.post('/peluquerias/actualizar', peluqueriasController.actualizar);
-*/
+
     //interfaces
     requestsRouter.get('/interfaces/', interfacesController.buscar);
 

@@ -14,12 +14,13 @@ import { gsUrlApi } from 'configuracion/ConfigServer';
 import Formsy from 'formsy-react'
 import { Redirect } from 'react-router-dom';
 import Alert from '@mui/material/Alert';
+
 /**
  * Form Validation Schema
  */
 
 
-function FirebaseLoginTab(props) {
+function FirebaseRegistroTab(props) {
 	const login = useSelector(({ auth }) => auth.login);
 
 	const [isFormValid, setIsFormValid] = useState(false);
@@ -101,7 +102,6 @@ function FirebaseLoginTab(props) {
 
 	}
 
-
 	if (ValidacionUser === true) {
 		return (
 			<Redirect to='/Servicios' />
@@ -109,8 +109,6 @@ function FirebaseLoginTab(props) {
 
 	} else {
 		localStorage.removeItem('Usuario')
-
-		
 		return (
 			<div className="w-full ">
 				<Formsy
@@ -120,31 +118,28 @@ function FirebaseLoginTab(props) {
 					ref={formRef}
 					className="flex flex-col justify-center w-full"
 				>
+                                                           
 					<TextField
-						className="mb-16"
-						type="text"
-						name="username"
-						label="Usuario"
-						onChange={handleChange}
-						validations={{
-							minLength: 4
-						}}
-						validationErrors={{
-							minLength: 'Min character length is 4'
-						}}
-						InputProps={{
-							endAdornment: (
-								<InputAdornment position="end">
-									<Icon className="text-20" color="action">
-										person
-									</Icon>
-								</InputAdornment>
-							)
-						}}
+						id="Nombrec"
+						label="Nombre"
 						variant="outlined"
-						required
 					/>
-
+					<TextField
+						id="Apellido"
+						label="Apellido"
+						variant="outlined"
+					/>
+					<TextField
+						id="Celular"
+						type="number"
+						label="Celular"
+						variant="outlined"
+					/>
+					<TextField
+						id="Usuario"
+						label="Usuario"
+						variant="outlined"
+					/>
 					<TextField
 						className="mb-16"
 						type="password"
@@ -173,40 +168,35 @@ function FirebaseLoginTab(props) {
 						variant="outlined"
 						required
 					/>
-					<div style={{  textAlign:'center'}} >
-						<Button
-						type="submit"
-						variant="contained"
-						color="primary"
-						className="w-full mx-auto normal-case mt-16 mb-16"
-						aria-label="LOG IN"
-						disabled={!isFormValid}
-						value="firebase"
-					>
-						Iniciar Sesión
-					</Button>
-					<p style={{color:"black"}}>¿Has olvidado tu contraseña?</p>
-					</div>
-					
-
-				</Formsy>
-				<div style={{ textAlign:'center',marginTop:'15px' }}>
-					<p style={{color:"black",alignItems:'center'}}>¿Aun no tienes Cuenta?</p>
-						<Button
-						
+					<div style={{display:'flex', gap:'2rem'}}>
+							<Button
+							type="submit"
 							variant="contained"
 							color="primary"
 							className=" mx-auto normal-case mt-16 mb-16"
 							aria-label="LOG IN"
-							onClick={() => props.MostrarFormulario(n)}
-							
-						>
-							Registrate
+							disabled={!isFormValid}
+							value="firebase"
+							>
+							Registrarse
+						</Button>
+						<Button
+								
+							variant="contained"
+							color="primary"
+							className=" mx-auto normal-case mt-16 mb-16"
+							aria-label="LOG IN"
+							disabled={!isFormValid}
+							value="firebase"
+							>
+								Cancelar
 						</Button>
 					</div>
+					
+				</Formsy>
 			</div>
 		);
 	}
 }
 
-export default FirebaseLoginTab;
+export default FirebaseRegistroTab;

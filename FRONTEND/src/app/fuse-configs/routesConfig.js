@@ -9,6 +9,7 @@ import RolesConfig from 'app/main/roles/RolesConfign';
 import LiquidosConfig from 'app/main/liquidos/LiquidosConfig';
 import ServiciosConfig from 'app/main/servicios/ServiciosConfig';
 import TurnosConfig from 'app/main/turnos/TurnosConfig'; 
+import RegistroConfig from 'app/main/registro/RegistroConfig';
 
 const routeConfigs = [ 
   LoginConfig, 
@@ -17,7 +18,8 @@ const routeConfigs = [
   RolesConfig,
   LiquidosConfig,
   TurnosConfig,
-  ServiciosConfig
+  ServiciosConfig,
+  RegistroConfig
 ];
 
 const routes = [
@@ -50,7 +52,12 @@ const routes = [
     {
     exact: true,
 		path:'/',
-		component: () => <Redirect to="/ServiciosConfig"/>
+		component: () => <Redirect to="/Servicios"/>
+  },
+    {
+    exact: true,
+		path:'/',
+		component: () => <Redirect to="/registro"/>
 	},
   {
     path: '/loading',

@@ -13,7 +13,7 @@ import TablaDisponibles from './TablaDisponibles';
 import { ToastContainer, toast } from 'react-toastify';
 
 let EstateEliminar = true;
-class DemoServicio extends React.Component {
+class DemoTurno extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -23,7 +23,7 @@ class DemoServicio extends React.Component {
             DataTipo: [],
             EstadoUsuario: false,
             Codigo: "",
-            Nombre: ""
+            Servicio: ""
 
         };
     }
@@ -55,19 +55,18 @@ class DemoServicio extends React.Component {
         var objSesion = JSON.parse(localStorage.getItem('Usuario'));
         let Empresa = objSesion.Usuario.Empresa;
 
-        let ObjUServicio = {};
-        ObjUServicio.IdServicio = this.state.IdServicio;
-        ObjUServicio.Codigo = this.state.Codigo;
-        ObjUServicio.Nombre = this.state.Nombre;
-        ObjUServicio.detalle_servicio = this.state.detalle_servicio;
-        ObjUServicio.Precio = this.state.Precio;
-        ObjUServicio.tipo_Servicio = this.state.tipo_Servicio;
-        ObjUServicio.imagen = this.state.Imagen;
-        ObjUServicio.Empresa = Empresa;
+        let ObjUTurno = {};
+        ObjUTurno.IdServicio = this.state.IdServicio;
+        ObjUTurno.Codigo_Servicio = this.state.Codigo;
+        ObjUTurno.Nombre_Servicio = this.state.Nombre;
+        ObjUTurno.Precio = this.state.Precio;
+        ObjUTurno.Fecha = this.state.FechaTurno;
+        ObjUTurno.Hora = this.state.ArrayHoras;
+        
 
         let Action = null;
         if (this.props.data._id) {
-            ObjUServicio._id = this.props.data._id;
+            ObjUTurno._id = this.props.data._id;
             Action = 'actualizar';
         } else {
             Action = 'insertar';
@@ -75,7 +74,7 @@ class DemoServicio extends React.Component {
 
         fetch(gsUrlApi + '/servicios/' + Action + '/', {
             method: 'POST',
-            body: JSON.stringify(ObjUServicio),
+            body: JSON.stringify(ObjUTurno),
             headers: {
                 'Content-Type': 'application/json; charset=UTF-8',
                 Accept: 'application/json'
@@ -120,11 +119,11 @@ class DemoServicio extends React.Component {
     };
 
     ElimarUsuario = e => {
-        var ObjUServicios = new Object();
-        ObjUServicios._id = this.props.data._id;
+        var ObjUTurnos = new Object();
+        ObjUTurnos._id = this.props.data._id;
         fetch(gsUrlApi + '/servicios/eliminar/', {
             method: 'POST',
-            body: JSON.stringify(ObjUServicios),
+            body: JSON.stringify(ObjUTurnos),
             headers: {
                 'Content-Type': 'application/json; charset=UTF-8',
                 Accept: 'application/json'
@@ -234,6 +233,19 @@ class DemoServicio extends React.Component {
                                                     />
 
                                                 </div>
+                                                <div>
+                                                    <TextField
+                                                        className="mt-8 mb-16 mx-4"
+                                                        type="number"
+                                                        name="Precio"
+                                                        
+                                                        value={this.state.Precio}
+                                                        onChange={this.onInputchange}
+                                                        label="Precio"
+                                                        variant="outlined"
+                                                        required
+                                                    />
+                                                </div>
                                                 <TablaDisponibles
                                                     DataTable={this.state.ArrayHoras ? this.state.ArrayHoras : []}
                                                 />
@@ -250,4 +262,4 @@ class DemoServicio extends React.Component {
     }
 }
 
-export default DemoServicio;
+export default DemoTurno;

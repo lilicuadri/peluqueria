@@ -15,38 +15,38 @@ import './App.css';
 import { confirmAlert } from 'react-confirm-alert';
 const rows = [
     {
-        id: 'Identificacion',
+        id: 'Fecha_Hora',
         align: 'left',
         disablePadding: false,
-        label: 'Identificación',
+        label: 'Fecha - Hora ',
         sort: true
     },
     {
-        id: 'rsocial',
+        id: 'servicio',
         align: 'left',
         disablePadding: false,
-        label: 'Nombre',
+        label: 'Servicio',
         sort: true
     },
     {
-        id: 'Celular',
+        id: 'Valor',
         align: 'left',
         disablePadding: false,
-        label: 'Celular',
+        label: 'Valor',
         sort: true
     },
 
     {
-        id: 'Activo',
+        id: 'Acciones',
         align: 'right',
         disablePadding: false,
-        label: 'Activo',
+        label: 'Eliminar',
         sort: true
     }, {
         id: 'Acciones',
         align: 'right',
         disablePadding: false,
-        label: 'Acciones',
+        label: 'Modificación',
         sort: true
     }
 ];
@@ -183,39 +183,23 @@ function ProductsTable(props) {
                                             selected={isSelected}
                                         >
                                             <TableCell component="th" scope="row">
-                                                {n.TipoIdentificacion}{"-"}{n.Identificacion}
+                                                {n.FechaTurno}
                                             </TableCell>
                                             <TableCell component="th" scope="row">
-                                                {n.TipoIdentificacion== 'NIT' ? n.rsocial :n.NombreCompleto}
+                                                {n.Servicio}
                                             </TableCell>
                                             <TableCell component="th" scope="row">
-                                                {n.Celular}
+                                                {n.Precio}
                                             </TableCell>
                                             <TableCell component="th" scope="row" align="right">
-                                                {n.Estado ? (
-                                                    <Icon className="text-green text-20">check_circle</Icon>
-                                                ) : (
-                                                    <Icon className="text-red text-20">block</Icon>
-                                                )}
+                                                <Button variant="outlined" startIcon={<DeleteIcon />}>
+                                                    Eliminar
+                                                </Button>
                                             </TableCell>
                                             <TableCell align="right">
-                                                <span className="icon-hover">
-                                                    <Icon
-                                                        onClick={() => props.MostrarFormulario(n)}
-                                                        className="textBlue"
-                                                    >
-                                                        edit
-                                                    </Icon>
-                                                </span>
-
-                                                <span className="icon-hover">
-                                                    <Icon
-                                                      onClick={() => alertaEliminar(n)}
-                                                        className="text-red pl-sm-2 "
-                                                    >
-                                                        delete
-                                                    </Icon>
-                                                </span>
+                                                <Button variant="contained" endIcon={<SendIcon />}>
+                                                    Modificar
+                                                </Button>
                                             </TableCell>
                                         </TableRow>
                                     );

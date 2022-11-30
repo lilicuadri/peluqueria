@@ -20,7 +20,8 @@ class Usuarios extends React.Component {
             Descripcion: '',
             Valor: '',
             Tipo: '',
-            IdPais: '',
+            Genero: '',
+            Duracuion: '',
             ListaVersiones: [],
             DataEdict: '',
             EstadoAlerta: false
