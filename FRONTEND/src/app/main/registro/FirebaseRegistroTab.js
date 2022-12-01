@@ -15,6 +15,7 @@ import Formsy from 'formsy-react'
 import { Redirect } from 'react-router-dom';
 import Alert from '@mui/material/Alert';
 
+
 /**
  * Form Validation Schema
  */
@@ -192,9 +193,11 @@ function FirebaseRegistroTab(props) {
 								Cancelar
 						</Button>
 					</div>
-					
+
 				</Formsy>
 			</div>
+			
+			
 		);
 	}
 }

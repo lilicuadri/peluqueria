@@ -21,7 +21,7 @@ function ProductValues() {
       <Container sx={{ mt: 15, mb: 30, display: 'flex', position: 'relative' }}>
         <Box
           component="img"
-          src="/static/themes/onepirate/productCurvyLines.png"
+          src="../images/papel.jpg"
           alt="curvy lines"
           sx={{ pointerEvents: 'none', position: 'absolute', top: -180 }}
         />
@@ -30,20 +30,20 @@ function ProductValues() {
             <Box sx={item}>
               <Box
                 component="img"
-                src="/static/themes/onepirate/productValues1.svg"
-                alt="suitcase"
+                src="assets/images/avatars/dama.jpg"
+                alt="DAMAS"
                 sx={{ height: 55 }}
               />
               <Typography variant="h6" sx={{ my: 5 }}>
-                The best luxury hotels
+               DAMAS
               </Typography>
               <Typography variant="h5">
                 {
-                  'From the latest trendy boutique hotel to the iconic palace with XXL pool'
+                  'Como mujer el deseo de verse cada día más linda se ha convertido en un reto'
                 }
 
                 {
-                  ', go for a mini-vacation just a few subway stops away from your home.'
+                  ' , en la peluquería Saloom tendrás la oportunidad de verte espectacular con nuestros servicios.'
                 }
               </Typography>
             </Box>
@@ -53,18 +53,18 @@ function ProductValues() {
               <Box
                 component="img"
                 src="/static/themes/onepirate/productValues2.svg"
-                alt="graph"
+                alt="CABALLERO"
                 sx={{ height: 55 }}
               />
               <Typography variant="h6" sx={{ my: 5 }}>
-                New experiences
+                CABALLEROS
               </Typography>
               <Typography variant="h5">
                 {
-                  'Privatize a pool, take a Japanese bath or wake up in 900m2 of garden… '
+                  'Ser un caballero también se lleva en su aspecto físico, '
                 }
 
-                {'your Sundays will not be alike.'}
+                {'Tenemos los servicios de alta calidad para ustedes.'}
               </Typography>
             </Box>
           </Grid>
@@ -73,15 +73,15 @@ function ProductValues() {
               <Box
                 component="img"
                 src="/static/themes/onepirate/productValues3.svg"
-                alt="clock"
+                alt="NIÑOS"
                 sx={{ height: 55 }}
               />
               <Typography variant="h6" sx={{ my: 5 }}>
-                Exclusive rates
+                NIÑAS Y NIÑOS
               </Typography>
               <Typography variant="h5">
-                {'By registering, you will access specially negotiated rates '}
-                {'that you will not find anywhere else.'}
+                {'Los niños también hacen parte de esta peluquería.  '}
+                {'Dale la oportunidad a tus niños que vivan una experiencia con nosotros.'}
               </Typography>
             </Box>
           </Grid>

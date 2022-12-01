@@ -20,18 +20,12 @@ function ProductSmokingHero() {
         }}
       >
         <Typography variant="h4" component="span">
-          Got any questions? Need help?
+         ¿NECESITAS AYUDA?
         </Typography>
       </Button>
       <Typography variant="subtitle1" sx={{ my: 3 }}>
-        We are here to help. Get in touch!
+        ¡Estamos aqui para ayudarte!
       </Typography>
-      <Box
-        component="img"
-        src="/static/themes/onepirate/producBuoy.svg"
-        alt="buoy"
-        sx={{ width: 60 }}
-      />
     </Container>
   );
 }

@@ -10,6 +10,7 @@ import LiquidosConfig from 'app/main/liquidos/LiquidosConfig';
 import ServiciosConfig from 'app/main/servicios/ServiciosConfig';
 import TurnosConfig from 'app/main/turnos/TurnosConfig'; 
 import RegistroConfig from 'app/main/registro/RegistroConfig';
+import ConogramaConfig from 'app/main/cronograma/CronogramaConfig';
 
 const routeConfigs = [ 
   LoginConfig, 
@@ -19,7 +20,8 @@ const routeConfigs = [
   LiquidosConfig,
   TurnosConfig,
   ServiciosConfig,
-  RegistroConfig
+  RegistroConfig,
+  ConogramaConfig
 ];
 
 const routes = [
@@ -58,6 +60,11 @@ const routes = [
     exact: true,
 		path:'/',
 		component: () => <Redirect to="/registro"/>
+	},
+   {
+    exact: true,
+		path:'/',
+		component: () => <Redirect to="/Cronograma"/>
 	},
   {
     path: '/loading',

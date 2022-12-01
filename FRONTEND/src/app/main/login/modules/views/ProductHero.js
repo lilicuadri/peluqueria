@@ -3,8 +3,9 @@ import Button from '../components/Button';
 import Typography from '../components/Typography';
 import ProductHeroLayout from './ProductHeroLayout';
 
+
 const backgroundImage =
-  'https://images.unsplash.com/photo-1534854638093-bada1813ca19?auto=format&fit=crop&w=1400';
+  'assets/images/avatars/papel.jpg';
 
 export default function ProductHero() {
   return (
@@ -22,7 +23,7 @@ export default function ProductHero() {
         alt="increase priority"
       />
       <Typography color="inherit" align="center" variant="h2" marked="center">
-        Upgrade your Sundays
+        Mejora tu estilo
       </Typography>
       <Typography
         color="inherit"
@@ -30,7 +31,7 @@ export default function ProductHero() {
         variant="h5"
         sx={{ mb: 4, mt: { sx: 4, sm: 10 } }}
       >
-        Enjoy secret offers up to -70% off the best luxury hotels every Sunday.
+        La mejor peluquería para Ocasiones Especiales, Novias y Quinceañeras
       </Typography>
       <Button
         color="secondary"
@@ -40,10 +41,10 @@ export default function ProductHero() {
         href="/premium-themes/onepirate/sign-up/"
         sx={{ minWidth: 200 }}
       >
-        Register
+        Registrarse
       </Button>
       <Typography variant="body2" color="inherit" sx={{ mt: 2 }}>
-        Discover the experience
+        Regístrate y asigna un turno para ofrecerte servicio de alta calidad  
       </Typography>
     </ProductHeroLayout>
   );

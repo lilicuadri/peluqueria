@@ -33,25 +33,22 @@ function ProductCTA() {
             }}
           >
             <Box component="form" onSubmit={handleSubmit} sx={{ maxWidth: 400 }}>
-              <Typography variant="h2" component="h2" gutterBottom>
-                Receive offers
+              <Typography variant="h4" component="h2" gutterBottom>
+                LO QUE ENCUENTRAS EN LA PELUQUERÍA
               </Typography>
-              <Typography variant="h5">
-                Taste the holidays of the everyday close to home.
+              <Typography variant="h7">
+                Un espacio dedicado a hombres, mujeres y niños.
+                Donde podrás acceder a los mas altos estándares de belleza y calidad,
+                con las últimas tendencias 
               </Typography>
-              <TextField
-                noBorder
-                placeholder="Your email"
-                variant="standard"
-                sx={{ width: '100%', mt: 3, mb: 2 }}
-              />
+              
               <Button
                 type="submit"
                 color="primary"
                 variant="contained"
                 sx={{ width: '100%' }}
               >
-                Keep me updated
+                INICIAR SESIÓN
               </Button>
             </Box>
           </Box>
@@ -73,6 +70,7 @@ function ProductCTA() {
               background: 'url(/static/themes/onepirate/productCTAImageDots.png)',
             }}
           />
+          
           <Box
             component="img"
             src="https://images.unsplash.com/photo-1527853787696-f7be74f2e39a?auto=format&fit=crop&w=750"
@@ -89,11 +87,6 @@ function ProductCTA() {
           />
         </Grid>
       </Grid>
-      <Snackbar
-        open={open}
-        closeFunc={handleClose}
-        message="We will send you our best offers, once a week."
-      />
     </Container>
   );
 }

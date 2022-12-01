@@ -4,6 +4,7 @@ import Link from '@mui/material/Link';
 import AppBar from '../components/AppBar';
 import Toolbar from '../components/Toolbar';
 
+
 const rightLink = {
   fontSize: 16,
   color: 'common.white',
@@ -23,25 +24,25 @@ function AppAppBar() {
             href="/premium-themes/onepirate/"
             sx={{ fontSize: 24 }}
           >
-            {'Peluqria Saloom Bogota'}
+            {'Peluquería Saloom'}
           </Link>
           <Box sx={{ flex: 1, display: 'flex', justifyContent: 'flex-end' }}>
             <Link
               color="inherit"
-              variant="h6"
+              variant="h3"
               underline="none"
               href="/Login"
               sx={rightLink}
             >
-              {'Sign In'}
+              {'Iniciar sesión'}
             </Link>
             <Link
-              variant="h6"
+              variant="h3"
               underline="none"
-              href="/Registro"
+              href="./Registro"
               sx={{ ...rightLink, color: 'secondary.main' }}
             >
-              {'Sign Up'}
+              {'registrarse'}
             </Link>
           </Box>
         </Toolbar>
