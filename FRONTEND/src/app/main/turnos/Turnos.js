@@ -8,7 +8,7 @@ import HeaderMaestro from '@fuse/core/Headers/HeaderMaestro';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-class Usuarios extends React.Component {
+class Turnos extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -159,4 +159,4 @@ class Usuarios extends React.Component {
 
 }
 
-export default Usuarios;
+export default Turnos; 

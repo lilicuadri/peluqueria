@@ -13,42 +13,10 @@ import TableSortLabel from '@mui/material/TableSortLabel';
 import Tooltip from '@mui/material/Tooltip';
 import './App.css';
 import { confirmAlert } from 'react-confirm-alert';
-const rows = [
-    {
-        id: 'Fecha_Hora',
-        align: 'left',
-        disablePadding: false,
-        label: 'Fecha - Hora ',
-        sort: true
-    },
-    {
-        id: 'servicio',
-        align: 'left',
-        disablePadding: false,
-        label: 'Servicio',
-        sort: true
-    },
-    {
-        id: 'Valor',
-        align: 'left',
-        disablePadding: false,
-        label: 'Valor',
-        sort: true
-    },
 
-    {
-        id: 'Acciones',
-        align: 'right',
-        disablePadding: false,
-        label: 'Eliminar',
-        sort: true
-    }, {
-        id: 'Acciones',
-        align: 'right',
-        disablePadding: false,
-        label: 'Modificación',
-        sort: true
-    }
+
+const rows = [
+   
 ];
 function ProductsTable(props) {
     const dispatch = useDispatch();
@@ -119,93 +87,7 @@ function ProductsTable(props) {
         <div clasName= "cardbody">
             <div className="w-full flex flex-col" >
                 <FuseScrollbars className="flex-grow overflow-x-auto">
-                    <Table className="min-w-xl" stickyHeader aria-label="sticky table" aria-labelledby="tableTitle">
-                        <TableHead>
-                        <TableRow className="h-48 sm:h-64">
-                            {rows.map(row => {
-                                return (
-                                    <TableCell
-                                        key={row.id}
-                                        align={row.align}
-                                        padding={row.disablePadding ? 'none' : 'default'}
-                                        sortDirection={order.id === row.id ? order.direction : false}
-                                    >
-                                        {row.sort && (
-                                            <Tooltip
-                                                title="Sort"
-                                                placement={row.align === 'right' ? 'bottom-end' : 'bottom-start'}
-                                                enterDelay={300}
-                                            >
-                                                <TableSortLabel
-                                                    active={order.id === row.id}
-                                                    direction={order.direction}
-                                                    onClick={createSortHandler(row.id)}
-                                                >
-                                                    {row.label}
-                                                </TableSortLabel>
-                                            </Tooltip>
-                                        )}
-                                    </TableCell>
-                                );
-                            }, this)}
-                        </TableRow>
-                        </TableHead>
-
-
-                        <TableBody>
-                            {_.orderBy(
-                                props.DataTable,
-                                [
-                                    o => {
-                                        switch (order.code) {
-                                            case 'categories': {
-                                                return o.categories[0];
-                                            }
-                                            default: {
-                                                return o[order.id];
-                                            }
-                                        }
-                                    }
-                                ],
-                                [order.direction]
-                            )
-                                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                                .map(n => {
-                                    const isSelected = selected.indexOf(n.code) !== -1;
-                                    return (
-                                        <TableRow
-                                            className="h-64 cursor-pointer"
-                                            hover
-                                            role="checkbox"
-                                            aria-checked={isSelected}
-                                            tabIndex={-1}
-                                            key={n._id}
-                                            selected={isSelected}
-                                        >
-                                            <TableCell component="th" scope="row">
-                                                {n.FechaTurno}
-                                            </TableCell>
-                                            <TableCell component="th" scope="row">
-                                                {n.Servicio}
-                                            </TableCell>
-                                            <TableCell component="th" scope="row">
-                                                {n.Precio}
-                                            </TableCell>
-                                            <TableCell component="th" scope="row" align="right">
-                                                <Button variant="outlined" startIcon={<DeleteIcon />}>
-                                                    Eliminar
-                                                </Button>
-                                            </TableCell>
-                                            <TableCell align="right">
-                                                <Button variant="contained" endIcon={<SendIcon />}>
-                                                    Modificar
-                                                </Button>
-                                            </TableCell>
-                                        </TableRow>
-                                    );
-                                })}
-                        </TableBody>
-                    </Table>
+                    
                 </FuseScrollbars>
 
                 <TablePagination

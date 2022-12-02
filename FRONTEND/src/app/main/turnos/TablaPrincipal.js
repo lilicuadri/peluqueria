@@ -13,42 +13,12 @@ import TableSortLabel from '@mui/material/TableSortLabel';
 import Tooltip from '@mui/material/Tooltip';
 import './App.css';
 import { confirmAlert } from 'react-confirm-alert';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import Typography from '@mui/material/Typography';
+import { Button, CardActionArea, CardActions } from '@mui/material';
 const rows = [
-    {
-        id: 'Fecha_Hora',
-        align: 'left',
-        disablePadding: false,
-        label: 'Fecha - Hora ',
-        sort: true
-    },
-    {
-        id: 'servicio',
-        align: 'left',
-        disablePadding: false,
-        label: 'Servicio',
-        sort: true
-    },
-    {
-        id: 'Valor',
-        align: 'left',
-        disablePadding: false,
-        label: 'Valor',
-        sort: true
-    },
-
-    {
-        id: 'Acciones',
-        align: 'right',
-        disablePadding: false,
-        label: 'Eliminar',
-        sort: true
-    }, {
-        id: 'Acciones',
-        align: 'right',
-        disablePadding: false,
-        label: 'Modificación',
-        sort: true
-    }
 ];
 function ProductsTable(props) {
     const dispatch = useDispatch();
@@ -119,93 +89,32 @@ function ProductsTable(props) {
         <div clasName= "cardbody">
             <div className="w-full flex flex-col" >
                 <FuseScrollbars className="flex-grow overflow-x-auto">
-                    <Table className="min-w-xl" stickyHeader aria-label="sticky table" aria-labelledby="tableTitle">
-                        <TableHead>
-                        <TableRow className="h-48 sm:h-64">
-                            {rows.map(row => {
-                                return (
-                                    <TableCell
-                                        key={row.id}
-                                        align={row.align}
-                                        padding={row.disablePadding ? 'none' : 'default'}
-                                        sortDirection={order.id === row.id ? order.direction : false}
-                                    >
-                                        {row.sort && (
-                                            <Tooltip
-                                                title="Sort"
-                                                placement={row.align === 'right' ? 'bottom-end' : 'bottom-start'}
-                                                enterDelay={300}
-                                            >
-                                                <TableSortLabel
-                                                    active={order.id === row.id}
-                                                    direction={order.direction}
-                                                    onClick={createSortHandler(row.id)}
-                                                >
-                                                    {row.label}
-                                                </TableSortLabel>
-                                            </Tooltip>
-                                        )}
-                                    </TableCell>
-                                );
-                            }, this)}
-                        </TableRow>
-                        </TableHead>
-
-
-                        <TableBody>
-                            {_.orderBy(
-                                props.DataTable,
-                                [
-                                    o => {
-                                        switch (order.code) {
-                                            case 'categories': {
-                                                return o.categories[0];
-                                            }
-                                            default: {
-                                                return o[order.id];
-                                            }
-                                        }
-                                    }
-                                ],
-                                [order.direction]
-                            )
-                                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                                .map(n => {
-                                    const isSelected = selected.indexOf(n.code) !== -1;
-                                    return (
-                                        <TableRow
-                                            className="h-64 cursor-pointer"
-                                            hover
-                                            role="checkbox"
-                                            aria-checked={isSelected}
-                                            tabIndex={-1}
-                                            key={n._id}
-                                            selected={isSelected}
-                                        >
-                                            <TableCell component="th" scope="row">
-                                                {n.FechaTurno}
-                                            </TableCell>
-                                            <TableCell component="th" scope="row">
-                                                {n.Servicio}
-                                            </TableCell>
-                                            <TableCell component="th" scope="row">
-                                                {n.Precio}
-                                            </TableCell>
-                                            <TableCell component="th" scope="row" align="right">
-                                                <Button variant="outlined" startIcon={<DeleteIcon />}>
-                                                    Eliminar
-                                                </Button>
-                                            </TableCell>
-                                            <TableCell align="right">
-                                                <Button variant="contained" endIcon={<SendIcon />}>
-                                                    Modificar
-                                                </Button>
-                                            </TableCell>
-                                        </TableRow>
-                                    );
-                                })}
-                        </TableBody>
-                    </Table>
+                
+                    <Card sx={{ maxWidth: 220}} className="m-auto ">
+                    <CardActionArea>
+                        <CardMedia
+                        component="img"
+                        height="140"
+                        image="assets/images/avatars/corte.jpg"
+                        alt="green iguana"
+                        />
+                        <CardContent>
+                        <Typography gutterBottom variant="h5" component="div">
+                            Lizard
+                        </Typography>
+                        <Typography variant="h7" color="text.secondary">
+                            Lizards are a widespread group of squamate reptiles, with over 6,000
+                            species, ranging across all continents except Antarctica
+                        </Typography>
+                        </CardContent>
+                    </CardActionArea>
+                    <CardActions>
+                        <Button size="small"  variant="contained" color="primary">
+                        Agendar Turno
+                        </Button>
+                    </CardActions>
+                    </Card>
+            
                 </FuseScrollbars>
 
                 <TablePagination
