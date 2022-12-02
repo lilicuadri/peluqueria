@@ -10,30 +10,18 @@ module.exports = () => {
     });
 
     const requestsRouter = express.Router();
-    const divisionPoliticaController = require('./controllers/divisionPolitica');
     const empresasController = require('./controllers/empresas');
     const usuariosController = require('./controllers/usuarios');
     const rolesController = require('./controllers/roles');
     const interfacesController = require('./controllers/interfaces'); 
     const departamentosController = require('./controllers/departamentos');
-    const divisionesController = require('./controllers/divisiones');
-    const periodoController = require('./controllers/periodo'); 
     const turnosController = require('./controllers/turnos');
     const serviciosController = require('./controllers/servicios');
     const cronogramasController = require('./controllers/cronogramas');
     const peluqueriasController = require('./controllers/peluquerias')
     
 
-    //divisionPolitica
-    requestsRouter.get('/municipios/:key/:value', divisionPoliticaController.findMunicipios);
-    requestsRouter.get('/paises/:key/:value', divisionPoliticaController.findPaises);
-    requestsRouter.get('/paises/', divisionPoliticaController.searchPaises);
-    requestsRouter.get('/corregimientos/:key/:value', divisionPoliticaController.findCorregimientos);
-    requestsRouter.get('/corregimientos/', divisionPoliticaController.searchCorregimientos);
-    requestsRouter.get('/localidades/:key/:value', divisionPoliticaController.findLocalidades);
-    requestsRouter.get('/localidades/', divisionPoliticaController.searchLocalidades);
-    requestsRouter.get('/barrios/:key/:value', divisionPoliticaController.findBarrios);
-    requestsRouter.get('/barrios/', divisionPoliticaController.searchBarrios);
+    
 
     //peluquerias
    requestsRouter.get('/peluquerias/:key/:value', peluqueriasController.buscar);
@@ -93,22 +81,8 @@ module.exports = () => {
     requestsRouter.post('/departamentos/actualizar', departamentosController.actualizar);
     requestsRouter.post('/departamentos/consultar', departamentosController.consultar);
 
-    //divisiones
-    requestsRouter.get('/divisiones/listar/:value', divisionesController.listar);
-    requestsRouter.get('/divisiones/:key/:value', divisionesController.buscar);
-    requestsRouter.post('/divisiones/insertar', divisionesController.insertar);
-    requestsRouter.post('/divisiones/eliminar', divisionesController.eliminar);
-    requestsRouter.post('/divisiones/actualizar', divisionesController.actualizar);
-    requestsRouter.post('/divisiones/consultar', divisionesController.consultar);
-          
-    //Periodo
-    requestsRouter.post('/periodo/insertar', periodoController.insertar)
-    requestsRouter.get('/periodo/consultar', periodoController.consultar)
-    requestsRouter.get('/periodo/listarPeriodosActivos/:value', periodoController.listarPeriodosActivos)
-    requestsRouter.get('/periodo/listar/:value', periodoController.listar)
-    requestsRouter.post('/periodo/actualizar', periodoController.actualizar)
-    requestsRouter.get('/periodo/eliminar/:value', periodoController.eliminar)
-
+   
+    
 
     router.use('/', indexRouter);
     router.use('/', requestsRouter);

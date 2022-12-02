@@ -64,7 +64,7 @@ function FirebaseRegistroTab(props) {
 			ObjUsuario.Nombre = state.Nombre; 
 			ObjUsuario.Apellido = state.Apellido; 
 			ObjUsuario.Empresa = "5cac12055d717e661ea7b95b"; 
-			ObjUsuario.Rol = "62aa0f1fa8e2d1d0c1fde691";
+			ObjUsuario.Rol = "6389757429b40122846ae51c";
 			ObjUsuario.Login = state.Usuario;
 			ObjUsuario.Clave = state.password;  
 			fetch(gsUrlApi + '/usuarios/insertar/', {

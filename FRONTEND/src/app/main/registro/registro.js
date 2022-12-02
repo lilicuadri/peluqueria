@@ -40,16 +40,6 @@ function SignIn() {
           <Typography variant="h3" gutterBottom marked="center" align="center">
             REGISTRATE
           </Typography>
-          <Typography variant="body2" align="center">
-            {'Not a member yet? '}
-            <Link
-              href="/premium-themes/onepirate/sign-up/"
-              align="center"
-              underline="always"
-            >
-              Registrarse Aqui
-            </Link>
-          </Typography>
         </React.Fragment>
         <FirebaseRegistroTab/>
       </AppForm>

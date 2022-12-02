@@ -105,12 +105,12 @@ function ProductsTable(props) {
                     <div className='flex'>
                         {ArrayServicios.map((item, key) => {
                             return (
-                                <Card sx={{ maxWidth: 220 }} className="m-auto ">
+                                <Card sx={{ maxWidth: 220}} className="m-auto ">
                                     <CardActionArea>
                                         <CardMedia
                                             component="img"
                                             height="140"
-                                            image="assets/images/avatars/corte.jpg"
+                                            image="assets/images/avatars/logo.jpg"
                                             alt="green iguana"
                                         />
                                         <CardContent>

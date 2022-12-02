@@ -6,7 +6,6 @@ import LoginConfig from 'app/main/login/loginConfig';
 import UsuarioConfig from 'app/main/usuarios/UsuarioConfig';
 import EmpresaConfig from 'app/main/empresa/EmpresaConfig';
 import RolesConfig from 'app/main/roles/RolesConfign'; 
-import LiquidosConfig from 'app/main/liquidos/LiquidosConfig';
 import ServiciosConfig from 'app/main/servicios/ServiciosConfig';
 import TurnosConfig from 'app/main/turnos/TurnosConfig'; 
 import RegistroConfig from 'app/main/registro/RegistroConfig';
@@ -18,7 +17,6 @@ const routeConfigs = [
   UsuarioConfig,
   EmpresaConfig,
   RolesConfig,
-  LiquidosConfig,
   TurnosConfig,
   ServiciosConfig,
   RegistroConfig,
