@@ -11,6 +11,7 @@ import ServiciosConfig from 'app/main/servicios/ServiciosConfig';
 import TurnosConfig from 'app/main/turnos/TurnosConfig'; 
 import RegistroConfig from 'app/main/registro/RegistroConfig';
 import ConogramaConfig from 'app/main/cronograma/CronogramaConfig';
+import homeConfig from 'app/main/login/homeConfig';
 
 const routeConfigs = [ 
   LoginConfig, 
@@ -21,7 +22,8 @@ const routeConfigs = [
   TurnosConfig,
   ServiciosConfig,
   RegistroConfig,
-  ConogramaConfig
+  ConogramaConfig,
+  homeConfig
 ];
 
 const routes = [
@@ -34,38 +36,33 @@ const routes = [
   {
     exact: true,
 		path:'/',
-		component: () => <Redirect to="/Empresa" />
+		component: () => <Redirect  to={<homeConfig/>}/>
 	},
   {
     exact: true,
-		path:'/',
+		path:'/Roles',
 		component: () => <Redirect to="/Roles" />
 	}, 
   {
     exact: true,
-		path:'/',
+		path:'/Turnos',
 		component: () => <Redirect to="/Turnos" />
 	},   
   {
     exact: true,
-		path:'/',
-		component: () => <Redirect to="/Liquidos"/>
+		path:'/Cronograma',
+		component: () => <Redirect to="/Cronograma"/>
   },
     {
     exact: true,
-		path:'/',
+		path:'/Servicios',
 		component: () => <Redirect to="/Servicios"/>
   },
     {
     exact: true,
-		path:'/',
+		path:'/registro',
 		component: () => <Redirect to="/registro"/>
-	},
-   {
-    exact: true,
-		path:'/',
-		component: () => <Redirect to="/Cronograma"/>
-	},
+	}, 
   {
     path: '/loading',
     exact: true,

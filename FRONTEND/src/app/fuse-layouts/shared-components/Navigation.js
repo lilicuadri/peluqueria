@@ -8,24 +8,25 @@ import { selectNavigation } from 'app/store/fuse/navigationSlice';
 import { navbarCloseMobile } from '../../store/fuse/navbarSlice';
 import React, { useState, useEffect } from 'react';
 import { gsUrlApi } from '../../../configuracion/ConfigServer'
+import { Redirect } from 'react-router-dom';
 
- let lstInterfaces = null; 
- let gLstinterfaces = []
+let lstInterfaces = null;
+let gLstinterfaces = []
 function Navigation(props) {
-  const navigation = useSelector(selectNavigation);
-  const theme = useTheme();
-  const mdDown = useMediaQuery(theme.breakpoints.down('lg'));
-  const dispatch = useDispatch();
+	const navigation = useSelector(selectNavigation);
+	const theme = useTheme();
+	const mdDown = useMediaQuery(theme.breakpoints.down('lg'));
+	const dispatch = useDispatch();
 	const [arraySidebar, setarraySibdedar] = useState([]);
 
-  function handleItemClick(item) {
-    if (mdDown) {
-      dispatch(navbarCloseMobile());
-    }
-  }
+	function handleItemClick(item) {
+		if (mdDown) {
+			dispatch(navbarCloseMobile());
+		}
+	}
 
-  const consultarInterfaces = () => {
-    fetch(gsUrlApi + '/interfaces/', {
+	const consultarInterfaces = () => {
+		fetch(gsUrlApi + '/interfaces/', {
 			method: 'GET',
 			body: JSON.stringify(),
 			headers: {
@@ -38,9 +39,9 @@ function Navigation(props) {
 				if (data.interfaces.length > 0) {
 					var lstData = [];
 					lstData = data.interfaces;
-					lstData = lstData.sort(function(a, b) {
+					lstData = lstData.sort(function (a, b) {
 						return a.Orden - b.Orden;
-					  });
+					});
 					let ObjSesion = JSON.parse(localStorage.getItem('Usuario'))
 					let glstPermisos = ObjSesion.Usuario.Rol.Permisos;
 					let lstDataAux = [];
@@ -61,9 +62,9 @@ function Navigation(props) {
 						return obj.parent === "#";
 					});
 
-					lstMenus.sort(function(a, b) {
+					lstMenus.sort(function (a, b) {
 						return a.Orden - b.Orden;
-					  });
+					});
 
 					for (var i = 0; i < lstMenus.length; i++) {
 						var objDataMenu = {};
@@ -74,9 +75,9 @@ function Navigation(props) {
 							return obj.parent === lstMenus[i].id;
 						});
 
-						lstSubMenu = lstSubMenu.sort(function(a, b) {
+						lstSubMenu = lstSubMenu.sort(function (a, b) {
 							return a.Orden - b.Orden;
-						  });
+						});
 
 						if (lstSubMenu.length > 0) {
 
@@ -109,29 +110,36 @@ function Navigation(props) {
 
 					}
 				}
-        setarraySibdedar(array) 
+				setarraySibdedar(array)
 			})
 			.catch(err => console.log("err", err));
-  }
+	}
 
-  useEffect(() => {
-    consultarInterfaces()
-  }, []);
+	useEffect(() => {
+		var ObjeSesion = JSON.parse(localStorage.getItem('Usuario'));
+		if (!ObjeSesion) {
+			return (
+				<Redirect to='/home' />
+			)
 
-  return (
-    <FuseNavigation
-      className={clsx('navigation', props.className)}
-      navigation={arraySidebar}
-      layout={props.layout}
-      dense={props.dense}
-      active={props.active}
-      onItemClick={handleItemClick}
-    />
-  );
+		}
+		consultarInterfaces()
+	}, []);
+
+	return (
+		<FuseNavigation
+			className={clsx('navigation', props.className)}
+			navigation={arraySidebar}
+			layout={props.layout}
+			dense={props.dense}
+			active={props.active}
+			onItemClick={handleItemClick}
+		/>
+	);
 }
 
 Navigation.defaultProps = {
-  layout: 'vertical',
+	layout: 'vertical',
 };
 
 export default memo(Navigation);

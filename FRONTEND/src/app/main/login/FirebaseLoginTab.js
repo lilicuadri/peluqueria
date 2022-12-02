@@ -198,7 +198,7 @@ function FirebaseLoginTab(props) {
 							color="primary"
 							className=" mx-auto normal-case mt-16 mb-16"
 							aria-label="LOG IN"
-							onClick={() => props.MostrarFormulario(n)}
+							href='/Registro'
 							
 						>
 							Registrate

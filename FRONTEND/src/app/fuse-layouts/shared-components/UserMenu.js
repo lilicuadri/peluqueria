@@ -67,7 +67,7 @@ function UserMenu(props) {
       >
         {!user.role || user.role.length === 0 ? (
           <>
-            <MenuItem component={Link} to="/login" role="button">
+            <MenuItem component={Link} to="/home" role="button">
               <ListItemIcon className="min-w-40">
                 <Icon>exit_to_app</Icon>
               </ListItemIcon>

@@ -59,35 +59,30 @@ function FirebaseRegistroTab(props) {
         });
     };
 
-	const handleSubmit = () =>  {
-
-		fetch(gsUrlApi + '/usuarios/validarIngreso', {
-			method: 'POST',
-			body: JSON.stringify({ Login: state.username, Clave: state.password }),
-			headers: {
-				'Content-Type': 'application/json; charset=UTF-8',
-				'Accept': 'application/json',
-			}
-		}).then(res => res.json())
-			.then(data => data)
-			.then(function Validar(data) {
-				if (data.error) {
-					AlertaError();
-				} else {
-					if (data.usuarios.length > 0) {
-						var objSesion = {};
-						objSesion.Usuario = data.usuarios[0];
-						localStorage.setItem('Usuario', JSON.stringify(objSesion))
-						setValidacionUser(!ValidacionUser)
-					} else {
-						AlertaLogin();
-					}
+	const handleSubmit = () =>  { 
+			let ObjUsuario = {}; 
+			ObjUsuario.Nombre = state.Nombre; 
+			ObjUsuario.Apellido = state.Apellido; 
+			ObjUsuario.Empresa = "5cac12055d717e661ea7b95b"; 
+			ObjUsuario.Rol = "62aa0f1fa8e2d1d0c1fde691";
+			ObjUsuario.Login = state.Usuario;
+			ObjUsuario.Clave = state.password;  
+			fetch(gsUrlApi + '/usuarios/insertar/', {
+				method: 'POST',
+				body: JSON.stringify(ObjUsuario),
+				headers: {
+					'Content-Type': 'application/json; charset=UTF-8',
+					Accept: 'application/json'
 				}
 			})
-			.catch(err => {
-				console.log("err", err)
-				AlertaError()
-			});
+				.then(res => res.json())
+				.then(data => data)
+				.then(data => {
+					if(data.Error === false){ 
+						alert("Datos Guardado");
+					} 
+				})
+				.catch(err => console.log('err', err)); 
 
 	}
 
@@ -118,28 +113,38 @@ function FirebaseRegistroTab(props) {
 					onInvalid={disableButton}
 					ref={formRef}
 					className="flex flex-col justify-center w-full"
-				>
-                                                           
+				>                  
 					<TextField
 						id="Nombrec"
+						name='Nombre'
 						label="Nombre"
+						onChange={handleChange}
 						variant="outlined"
+						className='mb-10'
 					/>
 					<TextField
 						id="Apellido"
+						name='Apellido'
+						onChange={handleChange}
 						label="Apellido"
 						variant="outlined"
+						className='mb-10'
 					/>
 					<TextField
 						id="Celular"
 						type="number"
 						label="Celular"
+						onChange={handleChange}
 						variant="outlined"
+						className='mb-10'
 					/>
 					<TextField
 						id="Usuario"
+						name='Usuario'
 						label="Usuario"
+						onChange={handleChange}
 						variant="outlined"
+						className='mb-10'
 					/>
 					<TextField
 						className="mb-16"
@@ -171,9 +176,10 @@ function FirebaseRegistroTab(props) {
 					/>
 					<div style={{display:'flex', gap:'2rem'}}>
 							<Button
-							type="submit"
+							type="button"
 							variant="contained"
 							color="primary"
+							onClick={() => handleSubmit()}
 							className=" mx-auto normal-case mt-16 mb-16"
 							aria-label="LOG IN"
 							disabled={!isFormValid}

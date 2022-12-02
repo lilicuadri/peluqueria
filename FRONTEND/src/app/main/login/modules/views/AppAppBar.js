@@ -20,8 +20,9 @@ function AppAppBar() {
           <Link
             variant="h6"
             underline="none"
-            color="inherit"
-            href="/premium-themes/onepirate/"
+            color="primary"
+            style={{color: "white !important"}}
+            href="/home"
             sx={{ fontSize: 24 }}
           >
             {'Peluquería Saloom'}

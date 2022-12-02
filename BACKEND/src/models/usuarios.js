@@ -3,12 +3,12 @@ const schema = mongoose.Schema;
 
 const usuarioSchema = schema({
     IdUsuario: String,
-    password: String,
+    Clave: String,
     Estado: Boolean,
 	Rol: { type: schema.Types.ObjectId, ref: 'roles' },
-    Usuario: String,
-    Contraseña: String,
+    Login: String, 
     Nombre: String,
+    Empresa: String,
     Apellido: String,
     TipoIdentificacion: String,
     Identificacion: String,

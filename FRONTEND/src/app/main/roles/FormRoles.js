@@ -161,8 +161,7 @@ class ForRoles extends React.Component {
                     }
                     this.setState(state => ({
                         ...state, nodes: arraySuper
-                    }))
-                    console.log(nodes)
+                    })) 
                 }
 
 
