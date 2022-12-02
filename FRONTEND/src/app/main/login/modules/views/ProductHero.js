@@ -5,7 +5,7 @@ import ProductHeroLayout from './ProductHeroLayout';
 
 
 const backgroundImage =
-  'assets/images/avatars/papel.jpg';
+  'assets/images/avatars/dama.jpg';
 
 export default function ProductHero() {
   return (

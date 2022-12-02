@@ -73,7 +73,7 @@ function ProductCTA() {
           
           <Box
             component="img"
-            src="https://images.unsplash.com/photo-1527853787696-f7be74f2e39a?auto=format&fit=crop&w=750"
+            src="assets/images/avatars/papel.jpg"
             alt="call to action"
             sx={{
               position: 'absolute',

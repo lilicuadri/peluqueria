@@ -30,9 +30,9 @@ function ProductValues() {
             <Box sx={item}>
               <Box
                 component="img"
-                src="assets/images/avatars/dama.jpg"
+                src="assets/images/avatars/mujer.jpg"
                 alt="DAMAS"
-                sx={{ height: 55 }}
+                sx={{ height: 132 }}
               />
               <Typography variant="h6" sx={{ my: 5 }}>
                DAMAS
@@ -52,9 +52,9 @@ function ProductValues() {
             <Box sx={item}>
               <Box
                 component="img"
-                src="/static/themes/onepirate/productValues2.svg"
+                src="assets/images/avatars/caballero.jpg"
                 alt="CABALLERO"
-                sx={{ height: 55 }}
+                sx={{ height: 132 }}
               />
               <Typography variant="h6" sx={{ my: 5 }}>
                 CABALLEROS
@@ -72,9 +72,9 @@ function ProductValues() {
             <Box sx={item}>
               <Box
                 component="img"
-                src="/static/themes/onepirate/productValues3.svg"
+                src="assets/images/avatars/niños.jpg"
                 alt="NIÑOS"
-                sx={{ height: 55 }}
+                sx={{ height: 136 }}
               />
               <Typography variant="h6" sx={{ my: 5 }}>
                 NIÑAS Y NIÑOS
