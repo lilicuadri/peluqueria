@@ -61,24 +61,12 @@ class DemoUsuario extends React.Component {
         ObjUsuario.TipoIdentificacion = this.state.TipoIdentificacion;
         ObjUsuario.Identificacion = this.state.Identificacion;
         ObjUsuario.Dv = this.state.Dv;
-        ObjUsuario.PrimerNombre = this.state.PrimerNombre;
-        ObjUsuario.SegundoNombre = this.state.SegundoNombre;
-        ObjUsuario.PrimerApellido = this.state.PrimerApellido;
-        ObjUsuario.SegundoApellido = this.state.SegundoApellido;
-        ObjUsuario.Filtro = this.state.TipoIdentificacion + " - " + this.state.Identificacion + " " + this.state.PrimerNombre + " " + this.state.SegundoNombre + " " + this.state.PrimerApellido + " " + this.state.SegundoApellido;
-        ObjUsuario.NombreCompleto = this.state.PrimerNombre + " " + this.state.SegundoNombre + " " + this.state.PrimerApellido + " " + this.state.SegundoApellido;
-        ObjUsuario.regimen = this.state.regimen;
+        ObjUsuario.Nombre = this.state.Nombre;
+        ObjUsuario.Apellido = this.state.Apellido;
         ObjUsuario.Celular = this.state.Celular;
         ObjUsuario.Empresa = Empresa;
-        ObjUsuario.Estado = this.state.EstadoUsuario;
-        ObjUsuario.Rol = this.state.Rol;
         ObjUsuario.Usuario = this.state.Usuario;
         ObjUsuario.Clave = this.state.Contraseña;
-        ObjUsuario.Email = this.state.Email;
-        ObjUsuario.FechaNacimiento = this.state.FechaNacimiento;
-        ObjUsuario.TextFechaNacimiento = this.state.FechaNacimiento.substr(0, 10);
-        ObjUsuario.Direccion = this.state.Direccion;
-        ObjUsuario.rsocial = this.state.rsocial;
 
         let Action = null;
         if (this.props.data._id) {
@@ -188,264 +176,43 @@ class DemoUsuario extends React.Component {
                                                 <div className="borde">
                                                     <div className="p-10">
                                                         <div className="flex -mx-4">
-                                                            <div className="min-w-50 pt-20">
-                                                                <Icon color="action">assignment_ind</Icon>
-                                                            </div>
 
-                                                            <FormControl sx={{ m: 1, width: 950 }}>
-                                                                <InputLabel id="demo-simple-select-helper-label">Tipo de Identificacion</InputLabel>
-                                                                <Select
-                                                                    labelId="demo-simple-select-helper-label"
-                                                                    id="demo-simple-select-helper"
-                                                                    value={this.state.TipoIdentificacion ? this.state.TipoIdentificacion : this.props.data.TipoIdentificacion }
-                                                                    name="TipoIdentificacion"
-                                                                    label="Tipo de Identificacion"
-                                                                    onChange={this.onInputchange}
-                                                                    fullWidth
-                                                                >
-                                                                    <MenuItem value="CC">CC</MenuItem>
-                                                                    <MenuItem value="NIT">NIT</MenuItem>
-                                                                </Select>
-                                                            </FormControl>
-
-
-                                                            {this.state.TipoIdentificacion == 'NIT'
-
-                                                                ? <>
-                                                                    {/* NIT */}
-                                                                    <div className="min-w-50 pt-20">
-                                                                        <Icon color="action">assignment_ind</Icon>
-                                                                    </div>
-                                                                    <TextField
-                                                                        className="mt-8 mb-16 mx-4"
-                                                                        type="Number"
-                                                                        name="Identificacion"
-                                                                        label="Numero de Identificación"
-                                                                        value={this.state.Identificacion}
-                                                                        onChange={this.onInputchange}
-                                                                        fullWidth
-                                                                        validations={{
-                                                                            minLength: 1
-                                                                        }}
-                                                                        validationErrors={{
-                                                                            minLength:
-                                                                                'El numero de caracteres minimos es de: 1'
-                                                                        }}
-                                                                        variant="outlined"
-                                                                        required
-                                                                    /*  InputLabelProps={{
-                                                                         shrink: true
-                                                                     }} */
-                                                                    />
-                                                                    <TextField
-                                                                        className="mt-8 mb-16 mx-4"
-                                                                        type="Number"
-                                                                        name="Dv"
-                                                                        fullWidth
-                                                                        value={this.state.Dv}
-                                                                        onChange={this.onInputchange}
-                                                                        label="Dv"
-                                                                        variant="outlined"
-                                                                        validations={{
-                                                                            minLength: 1
-                                                                        }}
-                                                                        validationErrors={{
-                                                                            minLength:
-                                                                                'El numero de caracteres minimos es de: 1'
-                                                                        }}
-                                                                         required
-                                                                   
-                                                                    />
-
-                                                                </>
-
-                                                                :
-                                                                <>
-                                                                    {/*    CC */}
-                                                                    <div className="min-w-50 pt-20">
-                                                                        <Icon color="action">assignment_ind</Icon>
-                                                                    </div>
-                                                                    <TextField
-                                                                        className="mt-8 mb-16 mx-4"
-                                                                        type="Number"
-                                                                        name="Identificacion"
-                                                                        label="Numero de Identificación"
-                                                                        value={this.state.Identificacion}
-                                                                        onChange={this.onInputchange}
-                                                                        fullWidth
-                                                                        validations={{
-                                                                            minLength: 1
-                                                                        }}
-                                                                        validationErrors={{
-                                                                            minLength:
-                                                                                'El numero de caracteres minimos es de: 1'
-                                                                        }}
-                                                                        variant="outlined"
-                                                                        required
-                                                                    /*  InputLabelProps={{
-                                                                         shrink: true
-                                                                     }} */
-                                                                    />
-                                                                </>
-                                                            }
-
-                                                        </div>
-                                                        {this.state.TipoIdentificacion == 'NIT'
-                                                            ?
-                                                            <>
-                                                                <div className="flex -mx-4">
-                                                                    <div className="min-w-50 pt-20">
-                                                                        <Icon color="action">account_circle</Icon>
-                                                                    </div>
-                                                                    <TextField
-                                                                        className="mt-8 mb-16 mx-12"
-                                                                        type="text"
-                                                                        name="rsocial"
-                                                                        value={this.state.rsocial}
-                                                                        label="Razon Social"
-                                                                        fullWidth
-                                                                        variant="outlined"
-                                                                        onChange={this.onInputchange}
-                                                                        required
-                                                                        validations={{
-                                                                            minLength: 1
-                                                                        }}
-                                                                        validationErrors={{
-                                                                            minLength:
-                                                                                'El numero de caracteres minimos es de: 1'
-                                                                        }}
-                                                                     /*  InputLabelProps={{
-                                                                         shrink: true
-                                                                     }} */
-
-                                                                    />
-
-                                                                </div>
-                                                            </>
-                                                            :
-                                                            <>
-                                                                <div className="flex -mx-4">
-                                                                    <div className="min-w-50 pt-20">
-                                                                        <Icon color="action">account_circle</Icon>
-                                                                    </div>
-                                                                    <TextField
-                                                                        className="mt-8 mb-16 mx-4"
-                                                                        type="text"
-                                                                        name="PrimerNombre"
-                                                                        value={this.state.PrimerNombre}
-                                                                        label="Primer Nombre"
-                                                                        fullWidth
-                                                                        variant="outlined"
-                                                                        onChange={this.onInputchange}
-                                                                        required
-                                                                        validations={{
-                                                                            minLength: 1
-                                                                        }}
-                                                                        validationErrors={{
-                                                                            minLength:
-                                                                                'El numero de caracteres minimos es de: 1'
-                                                                        }}
-                                                                     /*  InputLabelProps={{
-                                                                         shrink: true
-                                                                     }} */
-
-                                                                    />
-                                                                    <div className="min-w-50 pt-20">
-                                                                        <Icon color="action">account_circle</Icon>
-                                                                    </div>
-                                                                    <TextField
-                                                                        className="mt-8 mb-16 mx-4"
-                                                                        type="text"
-                                                                        name="SegundoNombre"
-                                                                        onChange={this.onInputchange}
-                                                                        value={this.state.SegundoNombre}
-                                                                        label="Segundo Nombre"
-                                                                        fullWidth
-                                                                        variant="outlined"
-                                                                    /* InputLabelProps={{
-                                                                        shrink: true
-                                                                    }} */
-                                                                    />
-                                                                    <div className="min-w-50 pt-20">
-                                                                        <Icon color="action">account_circle</Icon>
-                                                                    </div>
-                                                                    <TextField
-                                                                        className="mt-8 mb-16 mx-4"
-                                                                        type="text"
-                                                                        name="PrimerApellido"
-                                                                        value={this.state.PrimerApellido}
-                                                                        label="Primer Apellido"
-                                                                        onChange={this.onInputchange}
-                                                                        fullWidth
-                                                                        variant="outlined"
-                                                                        required
-                                                                        validations={{
-                                                                            minLength: 1
-                                                                        }}
-                                                                        validationErrors={{
-                                                                            minLength:
-                                                                                'El numero de caracteres minimos es de: 1'
-                                                                        }}
-                                                                          
-                                                                    /* InputLabelProps={{
-                                                                        shrink: true
-                                                                    }} */
-                                                                    />
-
-                                                                </div>
-                                                            </>
-
-                                                        }
-
-                                                        <div className="flex -mx-4">
-                                                            {this.state.TipoIdentificacion == 'NIT'
-                                                                ?
-                                                                <>
-                                                                </>
-                                                                : <>
-                                                                    <div className="min-w-50 pt-20">
-                                                                        <Icon color="action">account_circle</Icon>
-                                                                    </div>
-                                                                    <TextField
-                                                                        className="mt-8 mb-16 mx-4"
-                                                                        type="text"
-                                                                        name="SegundoApellido"
-                                                                        value={this.state.SegundoApellido}
-                                                                        label="Segundo Apellido"
-                                                                        onChange={this.onInputchange}
-                                                                        fullWidth
-                                                                        variant="outlined"
-                                                                        /* InputLabelProps={{
-                                                                            shrink: true
-                                                                        }} */
-
-                                                                          
-
-                                                                    />
-                                                                </>
-
-                                                            }
-
-                                                            <div className="min-w-50 pt-20">
-                                                                <Icon color="action">cake</Icon>
-                                                            </div>
-                                                            <TextField
+                                                             <TextField
                                                                 className="mt-8 mb-16 mx-4"
-                                                                type="date"
+                                                                type="text"
+                                                                name="Nombre"
                                                                 fullWidth
-                                                                name="FechaNacimiento"
-                                                                label={this.state.TipoIdentificacion == 'NIT' ? "Fecha Constitución": "Fecha Nacimiento"}
-                                                                variant="outlined"
+                                                                value={this.state.Nombre}
+                                                                label="Nombre"
                                                                 onChange={this.onInputchange}
-                                                                value={this.state.TextFechaNacimiento}
-                                                                InputLabelProps={{
-                                                                    shrink: true
-                                                                }}
+                                                                variant="outlined"
+                                                                required
+                                                            /*  InputLabelProps={{
+                                                                 shrink: true
+                                                             }} */
 
                                                             />
-                                                            <div className="min-w-50 pt-20">
-                                                                <Icon color="action">phone</Icon>
-                                                            </div>
+
+                                                        </div>
+                                                        
+
+                                                        <div className="flex -mx-4">
+                                                             <TextField
+                                                                className="mt-8 mb-16 mx-4"
+                                                                type="text"
+                                                                name="Apellido"
+                                                                fullWidth
+                                                                value={this.state.Apellido}
+                                                                label="Apellido"
+                                                                onChange={this.onInputchange}
+                                                                variant="outlined"
+                                                                required
+                                                            /*  InputLabelProps={{
+                                                                 shrink: true
+                                                             }} */
+
+                                                            />
+                                                            
                                                             <TextField
                                                                 className="mt-8 mb-16 mx-4"
                                                                 type="number"
@@ -463,69 +230,7 @@ class DemoUsuario extends React.Component {
                                                             />
 
                                                         </div>
-                                                        <div className="flex -mx-4">
-                                                            {/* <div className="min-w-50 pt-20">
-                                                                <Icon color="action">assignment_ind</Icon>
-                                                            </div>
-
-                                                            <FormControl sx={{ m: 1, width: 950 }}>
-                                                                <InputLabel id="demo-simple-select-helper-label">Regimen</InputLabel>
-                                                                <Select
-                                                                    labelId="demo-simple-select-helper-label"
-                                                                    id="demo-simple-select-helper"
-                                                                    label="Regimen"
-                                                                    onChange={this.onInputchange}
-                                                                    value={this.state.regimen ? this.state.regimen : this.props.data.regimen}
-                                                                    variant="outlined"
-                                                                    fullWidth
-                                                                >
-                                                                    <MenuItem value="comun">Comun</MenuItem>
-                                                                    <MenuItem value="regimen 2">Regimen 2</MenuItem>
-                                                                </Select>
-                                                            </FormControl> */}
-                                                            <div className="min-w-50 pt-20">
-                                                                <Icon color="action">email</Icon>
-                                                            </div>
-                                                            <TextField
-                                                                className="mt-8 mb-16 mx-4"
-                                                                type="text"
-                                                                fullWidth
-                                                                name="Email"
-                                                                label="Email"
-                                                                value={this.state.Email}
-                                                                onChange={this.onInputchange}
-                                                                validations={{
-                                                                    minLength: 4
-                                                                }}
-                                                                validationErrors={{
-                                                                    minLength: 'El numero de caracteres minimos es de 4'
-                                                                }}
-                                                                variant="outlined"
-                                                                required
-                                                            /*  InputLabelProps={{
-                                                                 shrink: true
-                                                             }} */
-
-                                                            />
-                                                            <div className="min-w-50 pt-20">
-                                                                <Icon color="action">place</Icon>
-                                                            </div>
-                                                            <TextField
-                                                                className="mt-8 mb-16 mx-4"
-                                                                type="text"
-                                                                name="Direccion"
-                                                                fullWidth
-                                                                value={this.state.Direccion}
-                                                                onChange={this.onInputchange}
-                                                                label="Dirección"
-                                                                variant="outlined"
-                                                            /*  InputLabelProps={{
-                                                                 shrink: true
-                                                             }} */
-
-                                                            />
-
-                                                        </div>
+                                                        
                                                         <div className="row">
                                                             <div className="min-w-48 fa-2x pt-2 pl-5">
                                                                 {/*  <FontAwesomeIcon icon={faUserCircle}>
@@ -535,33 +240,6 @@ class DemoUsuario extends React.Component {
 
                                                         </div>
                                                         <div className="flex -mx-4">
-                                                            <div className="min-w-50 pt-20">
-                                                                <Icon color="action">security</Icon>
-                                                            </div>
-
-                                                            <FormControl sx={{ m: 1, width: 1000 }}>
-                                                                <InputLabel id="demo-simple-select-helper-label">Rol</InputLabel>
-                                                                <Select
-                                                                    labelId="demo-simple-select-helper-label"
-                                                                    id="demo-simple-select-helper"
-                                                                    value={this.state.Rol ? this.state.Rol : this.props.data.Rol}
-                                                                    name="Rol"
-                                                                    label="Rol"
-                                                                    onChange={this.onInputchange}
-                                                                    fullWidth
-                                                                >
-                                                                    <MenuItem value="">Elegir...</MenuItem>
-                                                                    {this.state.DataRoles.map((e, key) => {
-                                                                        return (
-                                                                            <MenuItem value={e._id} key={e.Nombre}>
-                                                                                <em>{e.Nombre}</em>
-                                                                            </MenuItem>
-                                                                        );
-                                                                    })}
-                                                                </Select>
-                                                            </FormControl>
-
-
                                                             <div className="min-w-50 pt-20">
                                                                 <Icon color="action">person</Icon>
                                                             </div>

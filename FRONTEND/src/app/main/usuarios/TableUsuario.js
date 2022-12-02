@@ -14,18 +14,19 @@ import Tooltip from '@mui/material/Tooltip';
 import './App.css';
 import { confirmAlert } from 'react-confirm-alert';
 const rows = [
+
     {
-        id: 'Identificacion',
-        align: 'left',
-        disablePadding: false,
-        label: 'Identificación',
-        sort: true
-    },
-    {
-        id: 'rsocial',
+        id: 'Nombre',
         align: 'left',
         disablePadding: false,
         label: 'Nombre',
+        sort: true
+    },
+    {
+        id: 'Apellido',
+        align: 'left',
+        disablePadding: false,
+        label: 'Apellido',
         sort: true
     },
     {
@@ -183,10 +184,10 @@ function ProductsTable(props) {
                                             selected={isSelected}
                                         >
                                             <TableCell component="th" scope="row">
-                                                {n.TipoIdentificacion}{"-"}{n.Identificacion}
+                                                {n.Nombre}
                                             </TableCell>
                                             <TableCell component="th" scope="row">
-                                                {n.TipoIdentificacion== 'NIT' ? n.rsocial :n.NombreCompleto}
+                                                {n.Apellido}
                                             </TableCell>
                                             <TableCell component="th" scope="row">
                                                 {n.Celular}
