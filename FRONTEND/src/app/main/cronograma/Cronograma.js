@@ -1,4 +1,4 @@
-import Formulario from '@fuse/core/Turnos/FormTurnos';
+import Formulario from '@fuse/core/Cronograma/FormFormulario';
 import React from 'react';
 import FusePageCarded from '@fuse/core/FusePageCarded';
 import TablaPrincipal from './TablaPrincipal';
