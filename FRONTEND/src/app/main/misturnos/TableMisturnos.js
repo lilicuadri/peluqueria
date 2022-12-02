@@ -14,6 +14,7 @@ import Tooltip from '@mui/material/Tooltip';
 import './App.css';
 import { confirmAlert } from 'react-confirm-alert';
 import moment from 'moment';
+import { Button, CardActionArea, CardActions } from '@mui/material';
 
 const rows = [
     {
@@ -68,7 +69,7 @@ function ProductsTable(props) {
         handleRequestSort(event, property);
     };
 
-    useEffect(() => {}, [dispatch]);
+    useEffect(() => { }, [dispatch]);
     function handleRequestSort(event, property) {
         const id = property;
         let direction = 'desc';
@@ -168,9 +169,16 @@ function ProductsTable(props) {
                                             </td>
                                             <td className="text-center" style={{ width: '100px' }}>
                                                 <span className="icon-hover">
-                                                    <Icon onClick={() => alertaEliminar(n)} className="text-red pl-sm-2 ">
-                                                        delete
-                                                    </Icon>
+                                                    {n.Estado
+                                                        ? <>{n.Estado == "Anulado" ? <Button size="small" disabled variant="contained" color="warning">
+                                                        Turno Anulado
+                                                    </Button> : <Button size="small" disabled variant="contained" color="info">
+                                                        Turno Realizado
+                                                    </Button>}</>
+                                                        : <Icon onClick={() => alertaEliminar(n)} className="text-red pl-sm-2 ">
+                                                            delete
+                                                        </Icon>}
+
                                                 </span>
                                             </td>
                                         </tr>
