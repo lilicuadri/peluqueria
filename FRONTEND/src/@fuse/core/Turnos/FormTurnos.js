@@ -11,6 +11,7 @@ import HeaderForm from '@fuse/core/Headers/HeaderMaestroForm'
 import FusePageSimple from '../FusePageSimple';
 import TablaDisponibles from './TablaDisponibles';
 import { ToastContainer, toast } from 'react-toastify';
+// const Swal = require('sweetalert2')
 
 let EstateEliminar = true;
 class DemoTurno extends React.Component {
@@ -20,7 +21,8 @@ class DemoTurno extends React.Component {
             abierto: false,
             values: '',
             EstadoSave: false,
-            DataTipo: [],
+            ArrayHorarios: [],
+            ArrayTurnos: [],
             EstadoUsuario: false,
             Codigo: "",
             Servicio: ""
@@ -28,7 +30,7 @@ class DemoTurno extends React.Component {
         };
     }
     async componentDidMount(e) {
-        this.ConsultarRoles();
+        this.consultarTurnos()
         if (this.props.data._id) {
             EstateEliminar = false;
             let obj = this.props.data;
@@ -40,111 +42,100 @@ class DemoTurno extends React.Component {
                 ...state,
                 EstadoUsuario: this.props.data.Estado
             }));
+
         } else {
             EstateEliminar = true;
         }
 
-    }
-    CheckedEstado = () => {
-        this.setState({ EstadoUsuario: !this.state.EstadoUsuario });
-    };
-
-
-    //CONSTRUCTOR INSERTAR
-    insertarusuario = e => {
-        var objSesion = JSON.parse(localStorage.getItem('Usuario'));
-        let Empresa = objSesion.Usuario.Empresa;
-
-        let ObjUTurno = {};
-        ObjUTurno.IdServicio = this.state.IdServicio;
-        ObjUTurno.Codigo_Servicio = this.state.Codigo;
-        ObjUTurno.Nombre_Servicio = this.state.Nombre;
-        ObjUTurno.Precio = this.state.Precio;
-        ObjUTurno.Fecha = this.state.FechaTurno;
-        ObjUTurno.Hora = this.state.ArrayHoras;
-        
-
-        let Action = null;
-        if (this.props.data._id) {
-            ObjUTurno._id = this.props.data._id;
-            Action = 'actualizar';
-        } else {
-            Action = 'insertar';
-        }
-
-        fetch(gsUrlApi + '/servicios/' + Action + '/', {
-            method: 'POST',
-            body: JSON.stringify(ObjUTurno),
-            headers: {
-                'Content-Type': 'application/json; charset=UTF-8',
-                Accept: 'application/json'
-            }
-        })
-            .then(res => res.json())
-            .then(data => data)
-            .then(data => {
-                if (data.datos.length > 0) {
-                    this.props.MostrarFormulario('Cargar');
-                    toast.success("Datos Guardado");
-                } else {
-                    this.props.MostrarFormulario('Cargar');
-                    toast.error("Error al guardado el servicio");
-                }
-
-            })
-            .catch(err => console.log('err', err));
-    };
-
-    ConsultarRoles = () => {
-        var objSesion = JSON.parse(localStorage.getItem('Usuario'));
-        let Empresa = objSesion.Usuario.Empresa;
-
-        fetch(gsUrlApi + '/roles/listar/' + Empresa + '/', {
+        fetch(gsUrlApi + '/cronogramas/IdServicio/' + this.props.data._id, {
             method: 'GET',
             body: JSON.stringify(),
             headers: {
                 'Content-Type': 'application/json; charset=UTF-8',
                 Accept: 'application/json'
             }
-        })
-            .then(res => res.json())
+        }).then(res => res.json())
             .then(data => data)
-            .then(data => {
-                this.setState(state => ({
-                    ...state,
-                    DataRoles: data.datos
-                }));
+            .then((data) => {
+                if (data.datos.length) {
+                    let obj = data.datos[0];
+                    for (var key in obj) {
+                        let value = obj[key];
+                        this.state[key] = value
+                    }
+                }
             })
-            .catch(err => console.log('err', err));
-    };
+            .catch(err => console.log("err", err));
 
-    ElimarUsuario = e => {
-        var ObjUTurnos = new Object();
-        ObjUTurnos._id = this.props.data._id;
-        fetch(gsUrlApi + '/servicios/eliminar/', {
+    }
+
+    ReservarTurno = (row) => {
+
+        // Swal.fire({
+        //     title: 'Are you sure?',
+        //     text: "You won't be able to revert this!",
+        //     icon: 'warning',
+        //     showCancelButton: true,
+        //     confirmButtonColor: '#3085d6',
+        //     cancelButtonColor: '#d33',
+        //     confirmButtonText: 'Yes, delete it!'
+        //   }).then((result) => {
+        console.log("row--->", row);
+        // if (result.isConfirmed) {
+        var ObjSesion = JSON.parse(localStorage.getItem('Usuario'));
+        let ObjUsuario = ObjSesion.Usuario
+        let objtTurno = {
+            Codigo_Servicio: this.props.data._id,
+            Nombre_Servicio: this.props.data.Nombre,
+            Precio: this.props.data.Precio,
+            Fecha: this.state.FechaTurnoG,
+            Hora: row.Hora,
+            Usuario: ObjUsuario.PrimerNombre,
+            IdUsuario: ObjUsuario._id,
+            IdEmpresa: ObjUsuario.Empresa,
+            Identificacion: ObjUsuario.Identificacion
+        }
+        fetch(gsUrlApi + '/turnos/insertar/', {
             method: 'POST',
-            body: JSON.stringify(ObjUTurnos),
+            body: JSON.stringify(objtTurno),
             headers: {
                 'Content-Type': 'application/json; charset=UTF-8',
                 Accept: 'application/json'
             }
-        })
-            .then(res => res.json())
+        }).then(res => res.json())
             .then(data => data)
-            .then(data => {
+            .then((data) => {
                 this.props.MostrarFormulario('Cargar');
-
+                toast.success("Datos Guardado");
             })
-            .catch(err => console.log('err', err));
-    };
+            .catch(err => console.log("err", err));
 
-    onClick = () => {
-        this.props.MostrarFormulario('Cancelar');
-    };
+        // }
+        //   })
 
-    onClick2 = () => {
+    }
 
-    };
+    consultarTurnos = () => {
+        var ObjSesion = JSON.parse(localStorage.getItem('Usuario'));
+        let ObjUsuario = ObjSesion.Usuario
+        fetch(gsUrlApi + '/turnos/listar/' + ObjUsuario.Empresa, {
+            method: 'GET',
+            body: JSON.stringify(),
+            headers: {
+                'Content-Type': 'application/json; charset=UTF-8',
+                Accept: 'application/json'
+            }
+        }).then(res => res.json())
+            .then(data => data)
+            .then((data) => {
+                if (data.datos.length) { 
+                    this.setState(state => ({
+                        ...state,ArrayTurnos: data.datos
+                    }));
+                }
+            })
+            .catch(err => console.log("err", err));
+    }
 
     onInputchange = data => {
         if (data) {
@@ -159,27 +150,49 @@ class DemoTurno extends React.Component {
     onInputchangeFecha = data => {
         if (data) {
             let name = data.target.name;
-            let value = data.target.value;
+            let value = data.target.value.substr(0, 11);
             let ArrayTemp = [];
-            for (let i = 0; i < 5; i++) {
-                var currentDateObj = new Date(value);
+            var dt = new Date(data.target.value);
+            let fechaActual = `${(dt.getMonth() + 1).toString().padStart(2, '0')}/${dt.getDate().toString().padStart(2, '0')}/${dt.getFullYear().toString().padStart(4, '0')} ${dt.getHours().toString().padStart(2, '0')}:${dt.getMinutes().toString().padStart(2, '0')}:${dt.getSeconds().toString().padStart(2, '0')}`
+            this.setState(state => ({
+                ...state, FechaTurnoG: fechaActual.substr(0, 10) + " " + fechaActual.substr(11) + ".000Z"
+            }));
 
-                var numberOfMlSeconds = currentDateObj.getTime();
-                var addMlSeconds = 60 * 60000;
-                var newDateObj = new Date(numberOfMlSeconds + addMlSeconds);
-                var d = new Date(numberOfMlSeconds + addMlSeconds);
-                let dformat = [d.getMonth() + 1,
-                d.getDate(),
-                d.getFullYear()].join('/') + ' ' +
-                    [d.getHours(),
-                    d.getMinutes(),
-                    d.getSeconds()].join(':');
-                let obj = {};
-                obj.Hora = dformat
-                value = newDateObj;
-                ArrayTemp.push(obj)
+            var FechaInicial = new Date(this.state.ArrayHorarios[0]?.FechaInicial);
+            var FechaFinal = new Date(this.state.ArrayHorarios[0]?.FechaFinal);
+            var FechaFinalTime = FechaFinal.getMinutes()
+            var FechaInicialTime = FechaInicial.getMinutes()
+            var diff = FechaFinalTime - FechaInicialTime;
+            console.log("diff-->", diff);
+            console.log("value-->", this.state.duracion);
+            let item = diff / Number(this.state.duracion)
+            let ciclos = item.toFixed(1).substring(0, 1);
+            console.log("item-->", Number(item));
+            for (const iterator of this.state.ArrayHorarios) {
+                for (let i = 0; i < ciclos; i++) {
+                    var currentDateObj = new Date(value + iterator?.FechaInicial.substr(11));
+                    var numberOfMlSeconds = currentDateObj.getTime();
+                    var addMlSeconds = this.state.duracion * 60000;
+                    var d = new Date(numberOfMlSeconds + addMlSeconds);
+                    let dformat = [d.getMonth() + 1,
+                    d.getDate(),
+                    d.getFullYear()].join('/') + ' ' +
+                        [d.getHours(),
+                        d.getMinutes(),
+                        d.getSeconds()].join(':');
+                    let obj = {};
+                    for (const iterator of this.state.ArrayTurnos) { 
+                        if(dformat == iterator.Hora){
+                            obj.Estado = true;
+                        }
+                        obj.Hora = dformat
+                    }
+                    obj.Hora = dformat
+                    ArrayTemp.push(obj)
+                }
             }
 
+            
 
             this.setState(state => ({
                 ...state, ArrayHoras: ArrayTemp,
@@ -192,8 +205,8 @@ class DemoTurno extends React.Component {
                 <FusePageSimple
                     header={
                         <HeaderForm
-                            Guardar={() => this.insertarusuario()}
-                            MostrarFormulario={() => this.onClick()}
+                            Guardar={() => this.ReservarTurno()}
+                            MostrarFormulario={() => this.props.MostrarFormulario("Cargar")}
                         />}
 
                     content={
@@ -210,12 +223,21 @@ class DemoTurno extends React.Component {
                                                         type="text"
                                                         name="Servicio"
                                                         fullWidth
-                                                        value={this.state.Servicio}
-                                                        onChange={this.onInputchange}
+                                                        value={this.state.Nombre}
                                                         label="Servicio"
                                                         variant="outlined"
                                                         required
-
+                                                        disabled
+                                                    />
+                                                    <TextField
+                                                        className="mt-8 mb-16 mx-4"
+                                                        type="number"
+                                                        name="Precio"
+                                                        disabled
+                                                        value={this.state.Precio}
+                                                        label="Precio"
+                                                        variant="outlined"
+                                                        required
                                                     />
                                                     <TextField
                                                         className="mt-8 mb-16 col-md-6 mx-4"
@@ -223,8 +245,8 @@ class DemoTurno extends React.Component {
                                                         name="FechaTurno"
                                                         fullWidth
                                                         value={this.state.FechaTurno}
-                                                        onChange={this.onInputchangeFecha}
                                                         label="Fecha Turno"
+                                                        onChange={this.onInputchangeFecha}
                                                         variant="outlined"
                                                         required
                                                         InputLabelProps={{
@@ -233,20 +255,8 @@ class DemoTurno extends React.Component {
                                                     />
 
                                                 </div>
-                                                <div>
-                                                    <TextField
-                                                        className="mt-8 mb-16 mx-4"
-                                                        type="number"
-                                                        name="Precio"
-                                                        
-                                                        value={this.state.Precio}
-                                                        onChange={this.onInputchange}
-                                                        label="Precio"
-                                                        variant="outlined"
-                                                        required
-                                                    />
-                                                </div>
                                                 <TablaDisponibles
+                                                    ReservarTurno={(row) => this.ReservarTurno(row)}
                                                     DataTable={this.state.ArrayHoras ? this.state.ArrayHoras : []}
                                                 />
                                             </div>

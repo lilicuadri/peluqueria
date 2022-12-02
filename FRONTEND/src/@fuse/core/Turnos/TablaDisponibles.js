@@ -5,6 +5,7 @@ import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
+import Button from '@mui/material/Button';
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { withRouter } from 'react-router-dom';
@@ -166,16 +167,21 @@ function ProductsTable(props) {
                                             <TableCell component="th" scope="row">
                                                 {n.Hora}
                                             </TableCell>
-                                            <TableCell align="right">
-                                                <span className="icon-hover">
+                                            
+                                            <TableCell align="right" >
+                                            {n.Estado ?<Button type='button' onClick={() => props.ReservarTurno(n)} style={{backgroundColor: "gray"}}  className="icon-hover btn text-white">
+                                                      
+                                                      Turno Reservado
+                                                </Button>:<Button type='button' onClick={() => props.ReservarTurno(n)} style={{backgroundColor: "#2e7d32"}}  className="icon-hover btn text-white">
                                                     <Icon
-                                                        onClick={() => props.MostrarFormulario(n)}
+                                                        
                                                         className="textBlue"
                                                     >
                                                         edit
                                                     </Icon>
                                                     Reservar Turno
-                                                </span>
+                                                </Button>}
+                                                
                                             </TableCell>
                                         </TableRow>
                                     );

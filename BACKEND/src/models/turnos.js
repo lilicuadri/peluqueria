@@ -9,6 +9,10 @@ const rolSchema = schema({
     Codigo: String,
     Fecha: Date,
     Hora: String,  
+    Usuario: String,  
+    IdUsuario: String,  
+    Identificacion: String,
+    IdEmpresa: { type: schema.Types.ObjectId, ref: 'empresas' },
 });
 
 const rol = mongoose.model('turnos', rolSchema);

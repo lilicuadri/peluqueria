@@ -20,7 +20,7 @@ const repo = {
       let query = {"Empresa": new mongo.ObjectID(idEmpresa)};
      
       //find object
-      let response = await Model.find(query).sort('Nombre');
+      let response = await Model.find(query).populate('IdServicio'); 
 
       //set values
       let status, failure_code, failure_message;
@@ -61,7 +61,7 @@ const repo = {
       //return response
       return {
         status: status,
-        roles: response,
+        datos: response,
         failure_code: failure_code,
         failure_message: failure_message,
       };
@@ -95,7 +95,7 @@ const repo = {
       //return response
       return {
         status: status,
-        roles: response,
+        datos: response,
         failure_code: failure_code,
         failure_message: failure_message,
       };
@@ -131,7 +131,7 @@ const repo = {
       //return response
       return {
         status: status,
-        roles: response,
+        datos: response,
         failure_code: failure_code,
         failure_message: failure_message,
       };
@@ -168,7 +168,7 @@ const repo = {
       //return response
       return {
         status: status,
-        roles: response,
+        datos: response,
         failure_code: failure_code,
         failure_message: failure_message,
       };

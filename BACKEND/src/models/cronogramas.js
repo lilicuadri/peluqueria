@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const schema = mongoose.Schema;
 
 const rolSchema = schema({
-    IdServicio: String,
+    IdServicio: { type: schema.Types.ObjectId, ref: 'servicios' },
     ArrayHorarios: Array, 
     Empresa: String
 

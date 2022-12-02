@@ -29,21 +29,30 @@ class DemoPerfil extends React.Component {
         };
     }
     async componentDidMount(e) {
-        this.ConsultarRoles();
-        if (this.props.data._id) {
-            EstateEliminar = false;
-            let obj = this.props.data;
-            for (var key in obj) {
-                let value = obj[key];
-                this.state[key] = value
+        var objSesion = JSON.parse(localStorage.getItem('Usuario'));
+        let id = objSesion.Usuario._id;
+        fetch(gsUrlApi + '/usuarios/_id/' + id, {
+            method: 'GET',
+            body: JSON.stringify(),
+            headers: {
+                'Content-Type': 'application/json; charset=UTF-8',
+                Accept: 'application/json'
             }
-            this.setState(state => ({
-                ...state,
-                EstadoUsuario: this.props.data.Estado
-            }));
-        } else {
-            EstateEliminar = true;
-        }
+        })
+            .then(res => res.json())
+            .then(data => data)
+            .then(data => {
+                let obj = data.datos[0]
+                this.setState(state => ({
+                    ...state,
+                    EstadoUsuario: this.props.data.Estado
+                }));
+                for (var key in obj) {
+                    let value = obj[key];
+                    this.state[key] = value
+                }
+
+            })
 
     }
     CheckedEstado = () => {
@@ -87,56 +96,14 @@ class DemoPerfil extends React.Component {
             .then(res => res.json())
             .then(data => data)
             .then(data => {
-                if(data.Error === false){
+                if (data.Error === false) {
                     this.props.MostrarFormulario('Cargar');
                     toast.success("Datos Guardado");
-                } 
+                }
             })
             .catch(err => console.log('err', err));
     };
 
-    ConsultarRoles = () => {
-        var objSesion = JSON.parse(localStorage.getItem('Usuario'));
-        let Empresa = objSesion.Usuario.Empresa;
-
-        fetch(gsUrlApi + '/roles/listar/' + Empresa + '/', {
-            method: 'GET',
-            body: JSON.stringify(),
-            headers: {
-                'Content-Type': 'application/json; charset=UTF-8',
-                Accept: 'application/json'
-            }
-        })
-            .then(res => res.json())
-            .then(data => data)
-            .then(data => {
-                this.setState(state => ({
-                    ...state,
-                    DataRoles: data.datos
-                }));
-            })
-            .catch(err => console.log('err', err));
-    };
-
-    ElimarUsuario = e => {
-        var ObjUsuarios = new Object();
-        ObjUsuarios._id = this.props.data._id;
-        fetch(gsUrlApi + '/usuarios/eliminar/', {
-            method: 'POST',
-            body: JSON.stringify(ObjUsuarios),
-            headers: {
-                'Content-Type': 'application/json; charset=UTF-8',
-                Accept: 'application/json'
-            }
-        })
-            .then(res => res.json())
-            .then(data => data)
-            .then(data => {
-                this.props.MostrarFormulario('Cargar');
-
-            })
-            .catch(err => console.log('err', err));
-    };
 
     onClick = () => {
         this.props.MostrarFormulario('Cancelar');
@@ -168,7 +135,7 @@ class DemoPerfil extends React.Component {
                     content={
 
                         <div className="ventana">
-                            <Formsy  className="flex flex-col justify-center w-full">
+                            <Formsy className="flex flex-col justify-center w-full">
                                 <div>
                                     <CardBody className="cardbody my-5 mx-4">
                                         <form>
@@ -177,42 +144,42 @@ class DemoPerfil extends React.Component {
                                                     <div className="p-10">
                                                         <div className="flex -mx-4">
 
-                                                             <TextField
+                                                            <TextField
                                                                 className="mt-8 mb-16 mx-4"
                                                                 type="text"
                                                                 name="Nombre"
                                                                 fullWidth
-                                                                value={this.state.Nombre}
+                                                                value={this.state.PrimerNombre}
                                                                 label="Nombre"
                                                                 onChange={this.onInputchange}
                                                                 variant="outlined"
                                                                 required
-                                                            /*  InputLabelProps={{
-                                                                 shrink: true
-                                                             }} */
+                                                                InputLabelProps={{
+                                                                    shrink: true
+                                                                }}
 
                                                             />
 
                                                         </div>
-                                                        
+
 
                                                         <div className="flex -mx-4">
-                                                             <TextField
+                                                            <TextField
                                                                 className="mt-8 mb-16 mx-4"
                                                                 type="text"
                                                                 name="Apellido"
                                                                 fullWidth
-                                                                value={this.state.Apellido}
+                                                                value={this.state.PrimerApellido}
                                                                 label="Apellido"
                                                                 onChange={this.onInputchange}
                                                                 variant="outlined"
                                                                 required
-                                                            /*  InputLabelProps={{
-                                                                 shrink: true
-                                                             }} */
+                                                                InputLabelProps={{
+                                                                    shrink: true
+                                                                }}
 
                                                             />
-                                                            
+
                                                             <TextField
                                                                 className="mt-8 mb-16 mx-4"
                                                                 type="number"
@@ -223,14 +190,14 @@ class DemoPerfil extends React.Component {
                                                                 onChange={this.onInputchange}
                                                                 variant="outlined"
                                                                 required
-                                                            /*  InputLabelProps={{
-                                                                 shrink: true
-                                                             }} */
+                                                                InputLabelProps={{
+                                                                    shrink: true
+                                                                }}
 
                                                             />
 
                                                         </div>
-                                                        
+
                                                         <div className="row">
                                                             <div className="min-w-48 fa-2x pt-2 pl-5">
                                                                 {/*  <FontAwesomeIcon icon={faUserCircle}>
@@ -256,9 +223,9 @@ class DemoPerfil extends React.Component {
                                                                 onChange={this.onInputchange}
                                                                 variant="outlined"
                                                                 required
-                                                            /*  InputLabelProps={{
-                                                                 shrink: true
-                                                             }} */
+                                                                InputLabelProps={{
+                                                                    shrink: true
+                                                                }}
 
                                                             />
                                                             <div className="min-w-50 pt-20">
@@ -281,9 +248,9 @@ class DemoPerfil extends React.Component {
                                                                 style={{ 'borde-color': 'blue' }}
                                                                 variant="outlined"
                                                                 required
-                                                            /*  InputLabelProps={{
-                                                                 shrink: true
-                                                             }} */
+                                                                InputLabelProps={{
+                                                                    shrink: true
+                                                                }}
 
                                                             />
                                                             <Switch

@@ -8,6 +8,7 @@ import { withRouter } from 'react-router-dom';
 import TableHead from '@mui/material/TableHead';
 import TableSortLabel from '@mui/material/TableSortLabel';
 import Tooltip from '@mui/material/Tooltip';
+import Avatar from '@mui/material/Avatar';
 import './App.css';
 import { confirmAlert } from 'react-confirm-alert';
 import Card from '@mui/material/Card';
@@ -102,38 +103,44 @@ function ProductsTable(props) {
         <div clasName="cardbody">
             <div className="w-full flex flex-col" >
                 <FuseScrollbars className="flex-grow overflow-x-auto">
-                    <div className='flex'>
-                        {ArrayServicios.map((item, key) => {
-                            return (
-                                <Card sx={{ maxWidth: 220}} className="m-auto ">
-                                    <CardActionArea>
-                                        <CardMedia
-                                            component="img"
-                                            height="140"
-                                            image="assets/images/avatars/logo.jpg"
-                                            alt="green iguana"
-                                        />
-                                        <CardContent>
-                                            <Typography gutterBottom variant="h5" component="div">
-                                                {item.Nombre}
-                                            </Typography>
-                                            <Typography variant="h7" color="text.secondary">
-                                                {item.detalle_servicio}
-                                            </Typography>
-                                            <Typography gutterBottom variant="h7" component="div">
-                                                Precio  {": " + item.Precio}
-                                            </Typography>
-                                        </CardContent>
+                    {ArrayServicios.map((item, key) => {
+                        return (
+                            <div className='row'>
+
+                                <Card sx={{ maxWidth: 1087 }} className="m-auto mb-5">
+                                    <CardActionArea style={{ display: "inline-flex", justifyContent: "space-between" }}>
+                                        <div style={{ display: "inline-flex" }}>
+                                            <Avatar
+                                                style={{ marginTop: "35px", marginLeft: "26px" }}
+                                                alt="Remy Sharp"
+                                                src="assets/images/avatars/logo.jpg"
+                                                sx={{ width: 56, height: 56 }}
+                                            />
+                                            <CardContent>
+                                                <Typography gutterBottom variant="h5" component="div">
+                                                    {item.Nombre}
+                                                </Typography>
+                                                <Typography variant="h7" color="text.secondary">
+                                                    {item.detalle_servicio}
+                                                </Typography>
+                                                <Typography gutterBottom variant="h7" component="div">
+                                                    Precio  {": " + item.Precio}
+                                                </Typography>
+                                            </CardContent>
+                                        </div>
+
+
+                                        <CardActions style={{ minWidth: "139px" }}>
+                                            <Button size="small" onClick={() => props.MostrarFormulario(item)} variant="contained" color="primary">
+                                                Agendar Turno
+                                            </Button>
+                                        </CardActions>
                                     </CardActionArea>
-                                    <CardActions>
-                                        <Button size="small" onClick={() => props.MostrarFormulario(item)} variant="contained" color="primary">
-                                            Agendar Turno
-                                        </Button>
-                                    </CardActions>
+
                                 </Card>
-                            );
-                        })}
-                    </div>
+                            </div>
+                        );
+                    })}
                 </FuseScrollbars>
                 <TablePagination
                     className="overflow-hidden"

@@ -29,7 +29,7 @@ class Cronograma extends React.Component {
         var ObjeSesion = JSON.parse(localStorage.getItem('Usuario'));
         let Empresa = ObjeSesion.Usuario.Empresa;
 
-        fetch(gsUrlApi + '/turnos/listar/' + Empresa + "/", {
+        fetch(gsUrlApi + '/cronogramas/listar/' + Empresa + "/", {
             method: 'GET',
             body: JSON.stringify(),
             headers: {
