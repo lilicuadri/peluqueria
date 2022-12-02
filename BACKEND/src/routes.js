@@ -20,6 +20,7 @@ module.exports = () => {
     const periodoController = require('./controllers/periodo'); 
     const turnosController = require('./controllers/turnos');
     const serviciosController = require('./controllers/servicios');
+    const cronogramasController = require('./controllers/cronogramas');
     const peluqueriasController = require('./controllers/peluquerias')
     
 
@@ -68,6 +69,14 @@ module.exports = () => {
     requestsRouter.post('/turnos/modificar', turnosController.modificar);//nuevo-verificar
     requestsRouter.post('/turnos/consultar', turnosController.consultar);
 
+    //cronogramas 
+    requestsRouter.get('/cronogramas/listar/:value', cronogramasController.listar);
+    requestsRouter.get('/cronogramas/:key/:value', cronogramasController.buscar);
+    requestsRouter.post('/cronogramas/insertar', cronogramasController.insertar);
+    requestsRouter.post('/cronogramas/eliminar', cronogramasController.eliminar);
+    // requestsRouter.post('/cronogramas/actualizar', cronogramasController.actualizar);
+    requestsRouter.post('/cronogramas/consultar', cronogramasController.consultar);
+ 
        //servicios
     requestsRouter.get('/servicios/listar/:value', serviciosController.listar);
     requestsRouter.get('/servicios/:key/:value', serviciosController.buscar);

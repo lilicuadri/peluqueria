@@ -4,11 +4,9 @@ const schema = mongoose.Schema;
 
 const rolSchema = schema({
     IdServicio: String,
-    FechaFinal: String,
-    Precio: String,
-    FechaFinalTexto : String,
-    FechaInicial : Date,
-    FechaInicialTexto : String,  
+    ArrayHorarios: Array, 
+    Empresa: String
+
 });
 
 const rol = mongoose.model('cronogramas', rolSchema);
