@@ -12,7 +12,7 @@ import RegistroConfig from 'app/main/registro/RegistroConfig';
 import ConogramaConfig from 'app/main/cronograma/CronogramaConfig';
 import homeConfig from 'app/main/login/homeConfig';
 import PerfilConfig from 'app/main/perfil/PerfilConfig';
-
+import Misturnos from 'app/main/misturnos/MisturnosConfig'
 const routeConfigs = [ 
   LoginConfig, 
   UsuarioConfig,
@@ -23,64 +23,69 @@ const routeConfigs = [
   RegistroConfig,
   ConogramaConfig,
   homeConfig,
-  PerfilConfig
+  PerfilConfig,
+  Misturnos
 ];
 
 const routes = [
-  ...FuseUtils.generateRoutesFromConfigs(routeConfigs, null), 
-  {
-    exact: true,
-    path: '/login',
-    component: () => <Redirect to={<LoginConfig/>} />,
-  }, 
-  {
-    exact: true,
-		path:'/',
-		component: () => <Redirect  to={<homeConfig/>}/>
-	},
-  {
-    exact: true,
-		path:'/Roles',
-		component: () => <Redirect to="/Roles" />
-	}, 
-  {
-    exact: true,
-		path:'/Turnos',
-		component: () => <Redirect to="/Turnos" />
-	},   
-  {
-    exact: true,
-		path:'/Cronograma',
-		component: () => <Redirect to="/Cronograma"/>
-  },
+    ...FuseUtils.generateRoutesFromConfigs(routeConfigs, null),
     {
-    exact: true,
-		path:'/Servicios',
-		component: () => <Redirect to="/Servicios"/>
-  },
+        exact: true,
+        path: '/login',
+        component: () => <Redirect to={<LoginConfig />} />
+    },
     {
-    exact: true,
-		path:'/registro',
-		component: () => <Redirect to="/registro"/>
-  }, 
+        exact: true,
+        path: '/',
+        component: () => <Redirect to={<homeConfig />} />
+    },
     {
-    exact: true,
-		path:'/Perfil',
-		component: () => <Redirect to="/Perfil"/>
-	}, 
-  {
-    path: '/loading',
-    exact: true,
-    component: () => <FuseLoading />,
-  },
-  {
-    path: '/404',
-    component: () => <Error404Page />,
-  },
-  {
-    component: () => <Redirect to="/404" />,
-  },
- 
+        exact: true,
+        path: '/Roles',
+        component: () => <Redirect to="/Roles" />
+    },
+    {
+        exact: true,
+        path: '/Turnos',
+        component: () => <Redirect to="/Turnos" />
+    },
+    {
+        exact: true,
+        path: '/Cronograma',
+        component: () => <Redirect to="/Cronograma" />
+    },
+    {
+        exact: true,
+        path: '/Servicios',
+        component: () => <Redirect to="/Servicios" />
+    },
+    {
+        exact: true,
+        path: '/registro',
+        component: () => <Redirect to="/registro" />
+    },
+    {
+        exact: true,
+        path: '/Perfil',
+        component: () => <Redirect to="/Perfil" />
+    },
+    {
+        path: '/loading',
+        exact: true,
+        component: () => <FuseLoading />
+    },
+    {
+        path: '/Misturnos',
+        exact: true,
+        component: () => <Misturnos />
+    },
+    {
+        path: '/404',
+        component: () => <Error404Page />
+    },
+    {
+        component: () => <Redirect to="/404" />
+    }
 ];
 
 export default routes;

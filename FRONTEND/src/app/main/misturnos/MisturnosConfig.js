@@ -1,5 +1,5 @@
 import i18next from 'i18next';
-import Servicios from './Servicios';
+import Misturnos from './Misturnos';
 import en from './i18n/en';
 import tr from './i18n/tr';
 import ar from './i18n/ar';
@@ -9,20 +9,20 @@ i18next.addResourceBundle('en', 'examplePage', en);
 i18next.addResourceBundle('tr', 'examplePage', tr);
 i18next.addResourceBundle('ar', 'examplePage', ar);
 
-const ServiciosConfig = {
+const MisturnosConfig = {
     settings: {
         layout: {
             config: {}
         }
     },
     auth: authRoles.onlyGuest,
-    /* auth: ['Seguridad_Servicioss'], */
+    /* auth: ['Seguridad_Usuarios'], */
     routes: [
         {
-            path: '/Servicios',
-            component: Servicios
+            path: '/Misturnos',
+            component: Misturnos
         }
     ]
 };
 
-export default ServiciosConfig;
+export default MisturnosConfig;

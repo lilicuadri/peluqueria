@@ -6,8 +6,8 @@ import TextField from '@mui/material/TextField';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import Formsy from 'formsy-react';
-import Switch from '@mui/material/Switch'
-import HeaderForm from '@fuse/core/Headers/HeaderMaestroForm'
+import Switch from '@mui/material/Switch';
+import HeaderForm from '@fuse/core/Headers/HeaderMaestroForm';
 import FusePageSimple from '../FusePageSimple';
 import Icon from '@mui/material/Icon';
 import InputLabel from '@mui/material/InputLabel';
@@ -24,9 +24,8 @@ class DemoServicio extends React.Component {
             EstadoSave: false,
             DataTipo: [],
             EstadoUsuario: false,
-            Codigo: "",
-            Nombre: ""
-
+            Codigo: '',
+            Nombre: ''
         };
     }
     async componentDidMount(e) {
@@ -36,24 +35,22 @@ class DemoServicio extends React.Component {
             let obj = this.props.data;
             for (var key in obj) {
                 let value = obj[key];
-                this.state[key] = value
+                this.state[key] = value;
             }
-            this.setState(state => ({
+            this.setState((state) => ({
                 ...state,
                 EstadoUsuario: this.props.data.Estado
             }));
         } else {
             EstateEliminar = true;
         }
-
     }
     CheckedEstado = () => {
         this.setState({ EstadoUsuario: !this.state.EstadoUsuario });
     };
 
-
     //CONSTRUCTOR INSERTAR
-    insertarusuario = e => {
+    insertarusuario = (e) => {
         var objSesion = JSON.parse(localStorage.getItem('Usuario'));
         let Empresa = objSesion.Usuario.Empresa;
 
@@ -85,19 +82,18 @@ class DemoServicio extends React.Component {
                 Accept: 'application/json'
             }
         })
-            .then(res => res.json())
-            .then(data => data)
-            .then(data => {
+            .then((res) => res.json())
+            .then((data) => data)
+            .then((data) => {
                 if (data.datos.length > 0) {
                     this.props.MostrarFormulario('Cargar');
-                    toast.success("Datos Guardado");
+                    toast.success('Datos Guardado');
                 } else {
                     this.props.MostrarFormulario('Cargar');
-                    toast.error("Error al guardado el servicio");
+                    toast.error('Error al guardado el servicio');
                 }
-
             })
-            .catch(err => console.log('err', err));
+            .catch((err) => console.log('err', err));
     };
 
     ConsultarRoles = () => {
@@ -112,18 +108,18 @@ class DemoServicio extends React.Component {
                 Accept: 'application/json'
             }
         })
-            .then(res => res.json())
-            .then(data => data)
-            .then(data => {
-                this.setState(state => ({
+            .then((res) => res.json())
+            .then((data) => data)
+            .then((data) => {
+                this.setState((state) => ({
                     ...state,
                     DataRoles: data.datos
                 }));
             })
-            .catch(err => console.log('err', err));
+            .catch((err) => console.log('err', err));
     };
 
-    ElimarUsuario = e => {
+    ElimarUsuario = (e) => {
         var ObjUServicios = new Object();
         ObjUServicios._id = this.props.data._id;
         fetch(gsUrlApi + '/servicios/eliminar/', {
@@ -134,42 +130,35 @@ class DemoServicio extends React.Component {
                 Accept: 'application/json'
             }
         })
-            .then(res => res.json())
-            .then(data => data)
-            .then(data => {
+            .then((res) => res.json())
+            .then((data) => data)
+            .then((data) => {
                 this.props.MostrarFormulario('Cargar');
-
             })
-            .catch(err => console.log('err', err));
+            .catch((err) => console.log('err', err));
     };
 
     onClick = () => {
         this.props.MostrarFormulario('Cancelar');
     };
 
-    onClick2 = () => {
+    onClick2 = () => {};
 
-    };
-
-    onInputchange = data => {
+    onInputchange = (data) => {
         if (data) {
             let name = data.target.name;
             let value = data.target.value;
-            this.setState(state => ({
-                ...state, [name]: value,
+            this.setState((state) => ({
+                ...state,
+                [name]: value
             }));
         }
-    }
+    };
     render() {
         return (
             <>
                 <FusePageSimple
-                    header={
-                        <HeaderForm
-                            Guardar={() => this.insertarusuario()}
-                            MostrarFormulario={() => this.onClick()}
-                        />}
-
+                    header={<HeaderForm Guardar={() => this.insertarusuario()} MostrarFormulario={() => this.onClick()} />}
                     content={
                         <>
                             <div className="ventana">
@@ -177,7 +166,6 @@ class DemoServicio extends React.Component {
                                     <ModalBody>
                                         <div className="cardbody">
                                             <div className="p-10">
-
                                                 <div className="flex col-md-6 -mx-4">
                                                     <TextField
                                                         className="mt-8 mb-16 col-md-6 mx-4"
@@ -189,7 +177,6 @@ class DemoServicio extends React.Component {
                                                         label="Código"
                                                         variant="outlined"
                                                         required
-
                                                     />
                                                     <TextField
                                                         className="mt-8 mb-16 mx-4"
@@ -201,7 +188,6 @@ class DemoServicio extends React.Component {
                                                         label="Nombre"
                                                         variant="outlined"
                                                         required
-
                                                     />
                                                 </div>
                                                 <div className="flex col-md-6 -mx-4">
@@ -240,7 +226,6 @@ class DemoServicio extends React.Component {
                                                         variant="outlined"
                                                         required
                                                     />
-
                                                 </div>
                                                 <div className="flex col-md-6 -mx-4">
                                                     <TextField
@@ -253,11 +238,10 @@ class DemoServicio extends React.Component {
                                                         label="Genero"
                                                         variant="outlined"
                                                         required
-
                                                     />
                                                     <TextField
                                                         className="mt-8 mb-16 mx-4"
-                                                        type="text"
+                                                        type="number"
                                                         name="duracion"
                                                         fullWidth
                                                         value={this.state.duracion}
@@ -265,7 +249,6 @@ class DemoServicio extends React.Component {
                                                         label="Duración"
                                                         variant="outlined"
                                                         required
-
                                                     />
                                                 </div>
                                             </div>
@@ -277,7 +260,7 @@ class DemoServicio extends React.Component {
                     }
                 />
             </>
-        )
+        );
     }
 }
 
