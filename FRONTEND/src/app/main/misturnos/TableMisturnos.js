@@ -155,7 +155,7 @@ function ProductsTable(props) {
                                     return (
                                         <tr key={n._id}>
                                             <td className="text-center" style={{ width: '119px' }}>
-                                                {n.Fecha.substring(0, 10)}
+                                                {n.Fecha.substring(0, 10) + ' Hora: ' + n.Fecha.substring(11, 15)}
                                             </td>
                                             <td className="text-center" style={{ width: '100px' }}>
                                                 {n.Hora}
