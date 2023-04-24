@@ -13,6 +13,8 @@ import ConogramaConfig from 'app/main/cronograma/CronogramaConfig';
 import homeConfig from 'app/main/login/homeConfig';
 import PerfilConfig from 'app/main/perfil/PerfilConfig';
 import Misturnos from 'app/main/misturnos/MisturnosConfig'
+import GestionTurnosConfig from 'app/main/gestionarTurnos/TurnosConfig'
+
 const routeConfigs = [ 
   LoginConfig, 
   UsuarioConfig,
@@ -24,7 +26,8 @@ const routeConfigs = [
   ConogramaConfig,
   homeConfig,
   PerfilConfig,
-  Misturnos
+  Misturnos,
+  GestionTurnosConfig
 ];
 
 const routes = [
@@ -68,6 +71,11 @@ const routes = [
         exact: true,
         path: '/Perfil',
         component: () => <Redirect to="/Perfil" />
+    },
+    {
+        exact: true,
+        path: '/GestionarTurnos',
+        component: () => <Redirect to="/GestionarTurnos" />
     },
     {
         path: '/loading',

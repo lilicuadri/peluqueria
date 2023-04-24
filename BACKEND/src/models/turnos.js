@@ -13,6 +13,7 @@ const rolSchema = schema({
     IdUsuario: String,  
     Identificacion: String,
     IdEmpresa: { type: schema.Types.ObjectId, ref: 'empresas' },
+    Estado: String
 });
 
 const rol = mongoose.model('turnos', rolSchema);
