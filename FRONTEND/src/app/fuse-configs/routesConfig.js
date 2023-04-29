@@ -1,33 +1,35 @@
 import { Redirect } from 'react-router-dom';
-import FuseUtils from '@fuse/utils'; 
+import FuseUtils from '@fuse/utils';
 import FuseLoading from '@fuse/core/FuseLoading';
 import Error404Page from 'app/main/404/Error404Page';
-import LoginConfig from 'app/main/login/loginConfig'; 
+import LoginConfig from 'app/main/login/loginConfig';
 import UsuarioConfig from 'app/main/usuarios/UsuarioConfig';
 import EmpresaConfig from 'app/main/empresa/EmpresaConfig';
-import RolesConfig from 'app/main/roles/RolesConfign'; 
+import RolesConfig from 'app/main/roles/RolesConfign';
 import ServiciosConfig from 'app/main/servicios/ServiciosConfig';
-import TurnosConfig from 'app/main/turnos/TurnosConfig'; 
+import TurnosConfig from 'app/main/turnos/TurnosConfig';
 import RegistroConfig from 'app/main/registro/RegistroConfig';
 import ConogramaConfig from 'app/main/cronograma/CronogramaConfig';
 import homeConfig from 'app/main/login/homeConfig';
 import PerfilConfig from 'app/main/perfil/PerfilConfig';
-import Misturnos from 'app/main/misturnos/MisturnosConfig'
-import GestionTurnosConfig from 'app/main/gestionarTurnos/TurnosConfig'
+import Misturnos from 'app/main/misturnos/MisturnosConfig';
+import GestionTurnosConfig from 'app/main/gestionarTurnos/TurnosConfig';
+import ContraseñaConfig from 'app/main/contraseña/contraseñaConfig';
 
-const routeConfigs = [ 
-  LoginConfig, 
-  UsuarioConfig,
-  EmpresaConfig,
-  RolesConfig,
-  TurnosConfig,
-  ServiciosConfig,
-  RegistroConfig,
-  ConogramaConfig,
-  homeConfig,
-  PerfilConfig,
-  Misturnos,
-  GestionTurnosConfig
+const routeConfigs = [
+    LoginConfig,
+    UsuarioConfig,
+    EmpresaConfig,
+    RolesConfig,
+    TurnosConfig,
+    ServiciosConfig,
+    RegistroConfig,
+    ConogramaConfig,
+    homeConfig,
+    PerfilConfig,
+    Misturnos,
+    GestionTurnosConfig,
+    ContraseñaConfig
 ];
 
 const routes = [
@@ -86,6 +88,11 @@ const routes = [
         path: '/Misturnos',
         exact: true,
         component: () => <Misturnos />
+    },
+    {
+        exact: true,
+        path: '/contraseña',
+        component: () => <Redirect to="/contraseña" />
     },
     {
         path: '/404',

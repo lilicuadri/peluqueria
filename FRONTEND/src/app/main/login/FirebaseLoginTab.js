@@ -11,45 +11,45 @@ import * as yup from 'yup';
 import TextField from '@mui/material/TextField';
 import _ from '@lodash';
 import { gsUrlApi } from 'configuracion/ConfigServer';
-import Formsy from 'formsy-react'
+import Formsy from 'formsy-react';
 import { Redirect } from 'react-router-dom';
 import Alert from '@mui/material/Alert';
+import { Link } from 'react-router-dom';
 /**
  * Form Validation Schema
  */
 
-
 function FirebaseLoginTab(props) {
-	const login = useSelector(({ auth }) => auth.login);
+    const login = useSelector(({ auth }) => auth.login);
 
-	const [isFormValid, setIsFormValid] = useState(false);
-	const [showPassword, setShowPassword] = useState(false);
-	const [ValidacionUser, setValidacionUser] = useState(false);
-	const [state, setState] = useState({
+    const [isFormValid, setIsFormValid] = useState(false);
+    const [showPassword, setShowPassword] = useState(false);
+    const [ValidacionUser, setValidacionUser] = useState(false);
+    const [state, setState] = useState({
         username: '',
-        password: '',
+        password: ''
     });
 
-	const formRef = useRef(null);
+    const formRef = useRef(null);
 
-	useEffect(() => {
-		if (login.error && (login.error.username || login.error.password)) {
-			formRef.current.updateInputsWithError({
-				...login.error
-			});
-			disableButton();
-		}
-	}, [login.error]);
+    useEffect(() => {
+        if (login.error && (login.error.username || login.error.password)) {
+            formRef.current.updateInputsWithError({
+                ...login.error
+            });
+            disableButton();
+        }
+    }, [login.error]);
 
-	function disableButton() {
-		setIsFormValid(false);
-	}
+    function disableButton() {
+        setIsFormValid(false);
+    }
 
-	function enableButton() {
-		setIsFormValid(true);
-	}
+    function enableButton() {
+        setIsFormValid(true);
+    }
 
-	const handleChange = e => {
+    const handleChange = (e) => {
         const { name, value } = e.target;
         setState({
             ...state,
@@ -57,156 +57,146 @@ function FirebaseLoginTab(props) {
         });
     };
 
-	const handleSubmit = () =>  {
+    const handleSubmit = () => {
+        fetch(gsUrlApi + '/usuarios/validarIngreso', {
+            method: 'POST',
+            body: JSON.stringify({ Login: state.username, Clave: state.password }),
+            headers: {
+                'Content-Type': 'application/json; charset=UTF-8',
+                Accept: 'application/json'
+            }
+        })
+            .then((res) => res.json())
+            .then((data) => data)
+            .then(function Validar(data) {
+                if (data.error) {
+                    AlertaError();
+                } else {
+                    if (data.usuarios.length > 0) {
+                        var objSesion = {};
+                        objSesion.Usuario = data.usuarios[0];
+                        localStorage.setItem('Usuario', JSON.stringify(objSesion));
+                        setValidacionUser(!ValidacionUser);
+                    } else {
+                        AlertaLogin();
+                    }
+                }
+            })
+            .catch((err) => {
+                console.log('err', err);
+                AlertaError();
+            });
+    };
 
-		fetch(gsUrlApi + '/usuarios/validarIngreso', {
-			method: 'POST',
-			body: JSON.stringify({ Login: state.username, Clave: state.password }),
-			headers: {
-				'Content-Type': 'application/json; charset=UTF-8',
-				'Accept': 'application/json',
-			}
-		}).then(res => res.json())
-			.then(data => data)
-			.then(function Validar(data) {
-				if (data.error) {
-					AlertaError();
-				} else {
-					if (data.usuarios.length > 0) {
-						var objSesion = {};
-						objSesion.Usuario = data.usuarios[0];
-						localStorage.setItem('Usuario', JSON.stringify(objSesion))
-						setValidacionUser(!ValidacionUser)
-					} else {
-						AlertaLogin();
-					}
-				}
-			})
-			.catch(err => {
-				console.log("err", err)
-				AlertaError()
-			});
+    const AlertaLogin = () => {
+        alert('¿Usuario y contaseña no validos?');
+    };
 
-	}
+    const AlertaError = () => {
+        alert('Error de inicio de sesión, Intente ingresar en otro momento');
+    };
 
-	const AlertaLogin = () => {
-		alert('¿Usuario y contaseña no validos?');
-	};
+    const onClick = () => {};
 
-	const AlertaError = () => {
-		alert("Error de inicio de sesión, Intente ingresar en otro momento")
-	};
+    if (ValidacionUser === true) {
+        return <Redirect to="/Turnos" />;
+    } else {
+        localStorage.removeItem('Usuario');
 
-	const onClick = () => {
+        return (
+            <div className="w-full ">
+                <Formsy
+                    onValidSubmit={handleSubmit}
+                    onValid={enableButton}
+                    onInvalid={disableButton}
+                    ref={formRef}
+                    className="flex flex-col justify-center w-full"
+                >
+                    <TextField
+                        className="mb-16"
+                        type="text"
+                        name="username"
+                        label="Usuario"
+                        onChange={handleChange}
+                        validations={{
+                            minLength: 4
+                        }}
+                        validationErrors={{
+                            minLength: 'Min character length is 4'
+                        }}
+                        InputProps={{
+                            endAdornment: (
+                                <InputAdornment position="end">
+                                    <Icon className="text-20" color="action">
+                                        person
+                                    </Icon>
+                                </InputAdornment>
+                            )
+                        }}
+                        variant="outlined"
+                        required
+                    />
 
-	}
-
-
-	if (ValidacionUser === true) {
-		return (
-			<Redirect to='/Servicios' />
-		)
-
-	} else {
-		localStorage.removeItem('Usuario')
-
-		
-		return (
-			<div className="w-full ">
-				<Formsy
-					onValidSubmit={handleSubmit}
-					onValid={enableButton}
-					onInvalid={disableButton}
-					ref={formRef}
-					className="flex flex-col justify-center w-full"
-				>
-					<TextField
-						className="mb-16"
-						type="text"
-						name="username"
-						label="Usuario"
-						onChange={handleChange}
-						validations={{
-							minLength: 4
-						}}
-						validationErrors={{
-							minLength: 'Min character length is 4'
-						}}
-						InputProps={{
-							endAdornment: (
-								<InputAdornment position="end">
-									<Icon className="text-20" color="action">
-										person
-									</Icon>
-								</InputAdornment>
-							)
-						}}
-						variant="outlined"
-						required
-					/>
-
-					<TextField
-						className="mb-16"
-						type="password"
-						name="password"
-						label="Contraseña"
-						onChange={handleChange}
-						validations={{
-							minLength: 4
-						}}
-						validationErrors={{
-							minLength: 'Min character length is 4'
-						}}
-						InputProps={{
-							className: 'pr-2',
-							type: showPassword ? 'text' : 'password',
-							endAdornment: (
-								<InputAdornment position="end">
-									<IconButton onClick={() => setShowPassword(!showPassword)}>
-										<Icon className="text-20" color="action">
-											{showPassword ? 'visibility' : 'visibility_off'}
-										</Icon>
-									</IconButton>
-								</InputAdornment>
-							)
-						}}
-						variant="outlined"
-						required
-					/>
-					<div style={{  textAlign:'center'}} >
-						<Button
-						type="submit"
-						variant="contained"
-						color="primary"
-						className="w-full mx-auto normal-case mt-16 mb-16"
-						aria-label="LOG IN"
-						disabled={!isFormValid}
-						value="firebase"
-					>
-						Iniciar Sesión
-					</Button>
-					<p style={{color:"black"}}>¿Has olvidado tu contraseña?</p>
-					</div>
-					
-
-				</Formsy>
-				<div style={{ textAlign:'center',marginTop:'15px' }}>
-					<p style={{color:"black",alignItems:'center'}}>¿Aun no tienes Cuenta?</p>
-						<Button
-						
-							variant="contained"
-							color="primary"
-							className=" mx-auto normal-case mt-16 mb-16"
-							aria-label="LOG IN"
-							href='/Registro'
-							
-						>
-							Registrate
-						</Button>
-					</div>
-			</div>
-		);
-	}
+                    <TextField
+                        className="mb-16"
+                        type="password"
+                        name="password"
+                        label="Contraseña"
+                        onChange={handleChange}
+                        validations={{
+                            minLength: 4
+                        }}
+                        validationErrors={{
+                            minLength: 'Min character length is 4'
+                        }}
+                        InputProps={{
+                            className: 'pr-2',
+                            type: showPassword ? 'text' : 'password',
+                            endAdornment: (
+                                <InputAdornment position="end">
+                                    <IconButton onClick={() => setShowPassword(!showPassword)}>
+                                        <Icon className="text-20" color="action">
+                                            {showPassword ? 'visibility' : 'visibility_off'}
+                                        </Icon>
+                                    </IconButton>
+                                </InputAdornment>
+                            )
+                        }}
+                        variant="outlined"
+                        required
+                    />
+                    <div style={{ textAlign: 'center' }}>
+                        <Button
+                            type="submit"
+                            variant="contained"
+                            color="primary"
+                            className="w-full mx-auto normal-case mt-16 mb-16"
+                            aria-label="LOG IN"
+                            disabled={!isFormValid}
+                            value="firebase"
+                        >
+                            Iniciar Sesión
+                        </Button>
+                        <Link to="/contraseña" role="button" style={{ color: 'black' }}>
+                            ¿Has olvidado tu contraseña?
+                        </Link>
+                    </div>
+                </Formsy>
+                <div style={{ textAlign: 'center', marginTop: '15px' }}>
+                    <p style={{ color: 'black', alignItems: 'center' }}>¿Aun no tienes Cuenta?</p>
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        className=" mx-auto normal-case mt-16 mb-16"
+                        aria-label="LOG IN"
+                        href="/Registro"
+                    >
+                        Registrate
+                    </Button>
+                </div>
+            </div>
+        );
+    }
 }
 
 export default FirebaseLoginTab;

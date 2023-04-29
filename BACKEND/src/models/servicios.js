@@ -4,7 +4,7 @@ const schema = mongoose.Schema;
 const rolSchema = schema({
   Codigo: String,
   Nombre: String,
-  Precio: String,
+  Precio: Number,
   detalle_servicio: String,
   tipo_Servicio: String,
   imagen: String,

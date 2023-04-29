@@ -12,7 +12,6 @@ import TableHead from '@mui/material/TableHead';
 import TableSortLabel from '@mui/material/TableSortLabel';
 import Tooltip from '@mui/material/Tooltip';
 
-
 const rows = [
     {
         id: 'code',
@@ -41,14 +40,13 @@ function ProdutsTable(props) {
         id: null
     });
 
-    const createSortHandler = property => event => {
+    const createSortHandler = (property) => (event) => {
         handleRequestSort(event, property);
     };
 
     useEffect(() => {
         // dispatch(Actions.getProducts());
     }, [dispatch]);
-
 
     function handleRequestSort(event, property) {
         const id = property;
@@ -64,12 +62,10 @@ function ProdutsTable(props) {
         });
     }
 
-
     function handleClick(item) {
-        props.MostrarFormulario(item)
+        props.MostrarFormulario(item);
         // props.history.push(`/apps/e-commerce/products/${item.id}/${item.handle}`);
     }
-
 
     function handleChangePage(event, value) {
         setPage(value);
@@ -83,7 +79,7 @@ function ProdutsTable(props) {
             <FuseScrollbars className="flex-grow overflow-x-auto">
                 <Table className="min-w-xl" stickyHeader aria-label="sticky table" aria-labelledby="tableTitle">
                     <TableHead>
-                        {rows.map(row => {
+                        {rows.map((row) => {
                             return (
                                 <TableCell
                                     key={row.id}
@@ -111,12 +107,11 @@ function ProdutsTable(props) {
                         }, this)}
                     </TableHead>
 
-
                     <TableBody>
                         {_.orderBy(
                             props.DataTable,
                             [
-                                o => {
+                                (o) => {
                                     switch (order.Codigo) {
                                         case 'categories': {
                                             return o.categories[0];
@@ -130,7 +125,7 @@ function ProdutsTable(props) {
                             [order.direction]
                         )
                             .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                            .map(n => {
+                            .map((n) => {
                                 return (
                                     <TableRow
                                         className="h-64 cursor-pointer"
@@ -138,9 +133,8 @@ function ProdutsTable(props) {
                                         role="checkbox"
                                         tabIndex={-1}
                                         key={n.Codigo}
-                                        onClick={event => handleClick(n)}
+                                        onClick={(event) => handleClick(n)}
                                     >
-
                                         <TableCell component="th" scope="row">
                                             {n.Codigo}
                                         </TableCell>
@@ -148,7 +142,6 @@ function ProdutsTable(props) {
                                         <TableCell className="truncate" component="th" scope="row">
                                             {n.Nombre}
                                         </TableCell>
-
                                     </TableRow>
                                 );
                             })}
@@ -169,11 +162,10 @@ function ProdutsTable(props) {
                     'aria-label': 'Next Page'
                 }}
                 onPageChange={handleChangePage}
-				onRowsPerPageChange={handleChangeRowsPerPage}
+                onRowsPerPageChange={handleChangeRowsPerPage}
             />
         </div>
     );
-
 }
 
 export default withRouter(ProdutsTable);
