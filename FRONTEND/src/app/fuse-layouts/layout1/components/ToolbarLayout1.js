@@ -62,10 +62,6 @@ function ToolbarLayout1(props) {
 
             <FullScreenToggle />
 
-            <FuseSearch />
-
-            <QuickPanelToggleButton />
-
             <UserMenu />
           </div>
 

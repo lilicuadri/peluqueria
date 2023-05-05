@@ -6,8 +6,8 @@ import TextField from '@mui/material/TextField';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import Formsy from 'formsy-react';
-import Switch from '@mui/material/Switch'
-import HeaderForm from '@fuse/core/Headers/HeaderMaestroForm'
+import Switch from '@mui/material/Switch';
+import HeaderForm from '@fuse/core/Headers/HeaderMaestroForm';
 import FusePageSimple from '../FusePageSimple';
 import Icon from '@mui/material/Icon';
 import InputLabel from '@mui/material/InputLabel';
@@ -24,8 +24,8 @@ class DemoPerfil extends React.Component {
             EstadoSave: false,
             DataRoles: [],
             EstadoUsuario: false,
-            SegundoNombre: "",
-            SegundoApellido: ""
+            SegundoNombre: '',
+            SegundoApellido: ''
         };
     }
     async componentDidMount(e) {
@@ -39,29 +39,27 @@ class DemoPerfil extends React.Component {
                 Accept: 'application/json'
             }
         })
-            .then(res => res.json())
-            .then(data => data)
-            .then(data => {
-                let obj = data.datos[0]
-                this.setState(state => ({
+            .then((res) => res.json())
+            .then((data) => data)
+            .then((data) => {
+                let obj = data.datos[0];
+                console.log(obj);
+                this.setState((state) => ({
                     ...state,
                     EstadoUsuario: this.props.data.Estado
                 }));
                 for (var key in obj) {
                     let value = obj[key];
-                    this.state[key] = value
+                    this.state[key] = value;
                 }
-
-            })
-
+            });
     }
     CheckedEstado = () => {
         this.setState({ EstadoUsuario: !this.state.EstadoUsuario });
     };
 
-
     //CONSTRUCTOR INSERTAR
-    insertarusuario = e => {
+    insertarusuario = (e) => {
         var objSesion = JSON.parse(localStorage.getItem('Usuario'));
         let Empresa = objSesion.Usuario.Empresa;
 
@@ -78,13 +76,8 @@ class DemoPerfil extends React.Component {
         ObjUsuario.Clave = this.state.Contraseña;
 
         let Action = null;
-        if (this.props.data._id) {
-            ObjUsuario._id = this.props.data._id;
-            Action = 'actualizar';
-        } else {
-            Action = 'insertar';
-        }
-
+        ObjUsuario._id = this.props.data._id;
+        Action = 'actualizar';
         fetch(gsUrlApi + '/usuarios/' + Action + '/', {
             method: 'POST',
             body: JSON.stringify(ObjUsuario),
@@ -93,47 +86,39 @@ class DemoPerfil extends React.Component {
                 Accept: 'application/json'
             }
         })
-            .then(res => res.json())
-            .then(data => data)
-            .then(data => {
+            .then((res) => res.json())
+            .then((data) => data)
+            .then((data) => {
                 if (data.Error === false) {
                     this.props.MostrarFormulario('Cargar');
-                    toast.success("Datos Guardado");
+                    toast.success('Datos Guardado');
                 }
             })
-            .catch(err => console.log('err', err));
+            .catch((err) => console.log('err', err));
     };
-
 
     onClick = () => {
         this.props.MostrarFormulario('Cancelar');
     };
 
-    onClick2 = () => {
+    onClick2 = () => {};
 
-    };
-
-    onInputchange = data => {
+    onInputchange = (data) => {
         if (data) {
             let name = data.target.name;
             let value = data.target.value;
-            this.setState(state => ({
-                ...state, [name]: value,
+            this.setState((state) => ({
+                ...state,
+                [name]: value
             }));
         }
-    }
+    };
     render() {
         return (
             <>
                 <FusePageSimple
-                    header={
-                        <HeaderForm
-                            Guardar={() => this.insertarusuario()}
-                            MostrarFormulario={() => this.onClick()}
-                        />}
-
+                    header={<HeaderForm Guardar={() => this.insertarusuario()} MostrarFormulario={() => this.onClick()} />}
                     content={
-
                         <div className="ventana">
                             <Formsy className="flex flex-col justify-center w-full">
                                 <div>
@@ -143,13 +128,12 @@ class DemoPerfil extends React.Component {
                                                 <div className="borde">
                                                     <div className="p-10">
                                                         <div className="flex -mx-4">
-
                                                             <TextField
                                                                 className="mt-8 mb-16 mx-4"
                                                                 type="text"
                                                                 name="Nombre"
                                                                 fullWidth
-                                                                value={this.state.PrimerNombre}
+                                                                value={this.state.Nombre}
                                                                 label="Nombre"
                                                                 onChange={this.onInputchange}
                                                                 variant="outlined"
@@ -157,11 +141,8 @@ class DemoPerfil extends React.Component {
                                                                 InputLabelProps={{
                                                                     shrink: true
                                                                 }}
-
                                                             />
-
                                                         </div>
-
 
                                                         <div className="flex -mx-4">
                                                             <TextField
@@ -169,7 +150,7 @@ class DemoPerfil extends React.Component {
                                                                 type="text"
                                                                 name="Apellido"
                                                                 fullWidth
-                                                                value={this.state.PrimerApellido}
+                                                                value={this.state.Apellido}
                                                                 label="Apellido"
                                                                 onChange={this.onInputchange}
                                                                 variant="outlined"
@@ -177,7 +158,6 @@ class DemoPerfil extends React.Component {
                                                                 InputLabelProps={{
                                                                     shrink: true
                                                                 }}
-
                                                             />
 
                                                             <TextField
@@ -193,9 +173,7 @@ class DemoPerfil extends React.Component {
                                                                 InputLabelProps={{
                                                                     shrink: true
                                                                 }}
-
                                                             />
-
                                                         </div>
 
                                                         <div className="row">
@@ -204,7 +182,6 @@ class DemoPerfil extends React.Component {
                                                                     {' '}
                                                                 </FontAwesomeIcon> */}
                                                             </div>
-
                                                         </div>
                                                         <div className="flex -mx-4">
                                                             <div className="min-w-50 pt-20">
@@ -216,7 +193,7 @@ class DemoPerfil extends React.Component {
                                                                 fullWidth
                                                                 name="Usuario"
                                                                 label="Usuario"
-                                                                value={this.state.Usuario}
+                                                                value={this.state.Login}
                                                                 validations={{
                                                                     minLength: 1
                                                                 }}
@@ -226,7 +203,6 @@ class DemoPerfil extends React.Component {
                                                                 InputLabelProps={{
                                                                     shrink: true
                                                                 }}
-
                                                             />
                                                             <div className="min-w-50 pt-20">
                                                                 <Icon color="action">security</Icon>
@@ -251,7 +227,6 @@ class DemoPerfil extends React.Component {
                                                                 InputLabelProps={{
                                                                     shrink: true
                                                                 }}
-
                                                             />
                                                             <Switch
                                                                 className="mt-8 mb-16 mx-3"
@@ -259,9 +234,8 @@ class DemoPerfil extends React.Component {
                                                                 onChange={() => this.CheckedEstado()}
                                                                 aria-label="Custom Scrollbars"
                                                                 name="estado"
-
                                                             >
-                                                                <h4 >Activo</h4>
+                                                                <h4>Activo</h4>
                                                             </Switch>
                                                         </div>
                                                     </div>
@@ -271,12 +245,11 @@ class DemoPerfil extends React.Component {
                                     </CardBody>
                                 </div>
                             </Formsy>
-
-                        </div >
+                        </div>
                     }
                 />
             </>
-        )
+        );
     }
 }
 

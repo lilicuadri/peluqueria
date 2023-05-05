@@ -39,6 +39,7 @@ function FirebaseRegistroTab(props) {
             formRef.current.updateInputsWithError({
                 ...login.error
             });
+
             disableButton();
         }
     }, [login.error]);
