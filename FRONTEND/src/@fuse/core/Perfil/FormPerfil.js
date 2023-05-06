@@ -65,20 +65,14 @@ class DemoPerfil extends React.Component {
 
         let ObjUsuario = {};
         ObjUsuario.IdUsuario = this.state.IdUsuario;
-        ObjUsuario.TipoIdentificacion = this.state.TipoIdentificacion;
-        ObjUsuario.Identificacion = this.state.Identificacion;
-        ObjUsuario.Dv = this.state.Dv;
         ObjUsuario.Nombre = this.state.Nombre;
         ObjUsuario.Apellido = this.state.Apellido;
         ObjUsuario.Celular = this.state.Celular;
         ObjUsuario.Empresa = Empresa;
-        ObjUsuario.Usuario = this.state.Usuario;
-        ObjUsuario.Clave = this.state.Contraseña;
-
-        let Action = null;
-        ObjUsuario._id = this.props.data._id;
-        Action = 'actualizar';
-        fetch(gsUrlApi + '/usuarios/' + Action + '/', {
+        ObjUsuario.Login = this.state.Login;
+        ObjUsuario.Clave = this.state.Clave;
+        ObjUsuario._id = objSesion.Usuario._id;
+        fetch(gsUrlApi + '/usuarios/actualizar/', {
             method: 'POST',
             body: JSON.stringify(ObjUsuario),
             headers: {
@@ -89,10 +83,7 @@ class DemoPerfil extends React.Component {
             .then((res) => res.json())
             .then((data) => data)
             .then((data) => {
-                if (data.Error === false) {
-                    this.props.MostrarFormulario('Cargar');
-                    toast.success('Datos Guardado');
-                }
+                toast.success('Datos Guardado');
             })
             .catch((err) => console.log('err', err));
     };
@@ -191,7 +182,7 @@ class DemoPerfil extends React.Component {
                                                                 className="mt-8 mb-16 mx-4"
                                                                 type="text"
                                                                 fullWidth
-                                                                name="Usuario"
+                                                                name="Login"
                                                                 label="Usuario"
                                                                 value={this.state.Login}
                                                                 validations={{
@@ -211,7 +202,7 @@ class DemoPerfil extends React.Component {
                                                                 className="mt-8 mb-16 mx-3"
                                                                 type="password"
                                                                 fullWidth
-                                                                name="Contraseña"
+                                                                name="Clave"
                                                                 label="Contraseña"
                                                                 value={this.state.Clave}
                                                                 validations={{

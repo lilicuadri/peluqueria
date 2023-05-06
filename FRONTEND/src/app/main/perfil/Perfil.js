@@ -1,10 +1,6 @@
 import DemoPerfil from '@fuse/core/Perfil/FormPerfil';
 import React from 'react';
-import FusePageCarded from '@fuse/core/FusePageCarded';
 import { gsUrlApi } from '../../../configuracion/ConfigServer';
-import Alerta from '@fuse/core/DemoAlerta/Alertas';
-import HeaderMaestro from '@fuse/core/Headers/HeaderMaestro';
-import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 class Perfil extends React.Component {
