@@ -1,15 +1,14 @@
-const inputValidation = require('../../middlewares/inputValidation');
-const schema = require('./find.schema');
-const repository = require('../../repositories/turnos');
-const constants = require('../../constants');
+const inputValidation = require("../../middlewares/inputValidation");
+const schema = require("./find.schema");
+const repository = require("../../repositories/turnos");
+const constants = require("../../constants");
 
 const validate = inputValidation.validate(schema);
 
 async function handler(req, res, next) {
   try {
-
     //find
-    let response = await repository.listar(req.params.value);
+    let response = await repository.listar(req.params.value, req.params.key);
 
     //set status code
     let statusCode;
@@ -27,8 +26,8 @@ async function handler(req, res, next) {
     let oResponse = {
       datos: response.datos,
       Error: false,
-      Mensaje: "OK"
-    }
+      Mensaje: "OK",
+    };
 
     //return response
     if (statusCode !== 200) {
@@ -39,7 +38,6 @@ async function handler(req, res, next) {
     }
 
     res.status(statusCode).send(oResponse);
-
   } catch (error) {
     next(error);
   }

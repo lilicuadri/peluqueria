@@ -177,8 +177,9 @@ function FirebaseLoginTab(props) {
                         >
                             Iniciar Sesión
                         </Button>
+                        ¿Has olvidado tu contraseña?
                         {/*   <Link to="/contraseña" role="button" style={{ color: 'black' }}>
-                            ¿Has olvidado tu contraseña?
+                            
                     </Link> */}
                     </div>
                 </Formsy>

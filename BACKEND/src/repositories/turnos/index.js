@@ -13,11 +13,14 @@ const v1options = {
 uuidv1(v1options);
 
 const repo = {
-  listar: async (idEmpresa) => {
+  listar: async (idEmpresa, IdUsuario) => {
     try {
       //find query
       let query = { IdEmpresa: new mongo.ObjectID(idEmpresa) };
 
+      if (IdUsuario) {
+        query.IdUsuario = IdUsuario;
+      }
       //find object
       let response = await Model.find(query).sort("Nombre_Servicio");
 

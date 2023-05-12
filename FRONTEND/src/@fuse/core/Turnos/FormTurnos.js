@@ -24,25 +24,23 @@ class DemoTurno extends React.Component {
             ArrayHorarios: [],
             ArrayTurnos: [],
             EstadoUsuario: false,
-            Codigo: "",
-            Servicio: ""
-
+            Codigo: '',
+            Servicio: ''
         };
     }
     async componentDidMount(e) {
-        this.consultarTurnos()
+        this.consultarTurnos();
         if (this.props.data._id) {
             EstateEliminar = false;
             let obj = this.props.data;
             for (var key in obj) {
                 let value = obj[key];
-                this.state[key] = value
+                this.state[key] = value;
             }
-            this.setState(state => ({
+            this.setState((state) => ({
                 ...state,
                 EstadoUsuario: this.props.data.Estado
             }));
-
         } else {
             EstateEliminar = true;
         }
@@ -54,23 +52,22 @@ class DemoTurno extends React.Component {
                 'Content-Type': 'application/json; charset=UTF-8',
                 Accept: 'application/json'
             }
-        }).then(res => res.json())
-            .then(data => data)
+        })
+            .then((res) => res.json())
+            .then((data) => data)
             .then((data) => {
                 if (data.datos.length) {
                     let obj = data.datos[0];
                     for (var key in obj) {
                         let value = obj[key];
-                        this.state[key] = value
+                        this.state[key] = value;
                     }
                 }
             })
-            .catch(err => console.log("err", err));
-
+            .catch((err) => console.log('err', err));
     }
 
     ReservarTurno = (row) => {
-
         // Swal.fire({
         //     title: 'Are you sure?',
         //     text: "You won't be able to revert this!",
@@ -80,10 +77,10 @@ class DemoTurno extends React.Component {
         //     cancelButtonColor: '#d33',
         //     confirmButtonText: 'Yes, delete it!'
         //   }).then((result) => {
-        console.log("row--->", row);
+        console.log('row--->', row);
         // if (result.isConfirmed) {
         var ObjSesion = JSON.parse(localStorage.getItem('Usuario'));
-        let ObjUsuario = ObjSesion.Usuario
+        let ObjUsuario = ObjSesion.Usuario;
         let objtTurno = {
             Codigo_Servicio: this.props.data._id,
             Nombre_Servicio: this.props.data.Nombre,
@@ -94,7 +91,7 @@ class DemoTurno extends React.Component {
             IdUsuario: ObjUsuario._id,
             IdEmpresa: ObjUsuario.Empresa,
             Identificacion: ObjUsuario.Identificacion
-        }
+        };
         fetch(gsUrlApi + '/turnos/insertar/', {
             method: 'POST',
             body: JSON.stringify(objtTurno),
@@ -102,22 +99,22 @@ class DemoTurno extends React.Component {
                 'Content-Type': 'application/json; charset=UTF-8',
                 Accept: 'application/json'
             }
-        }).then(res => res.json())
-            .then(data => data)
+        })
+            .then((res) => res.json())
+            .then((data) => data)
             .then((data) => {
                 this.props.MostrarFormulario('Cargar');
-                toast.success("Datos Guardado");
+                toast.success('Datos Guardado');
             })
-            .catch(err => console.log("err", err));
+            .catch((err) => console.log('err', err));
 
         // }
         //   })
-
-    }
+    };
 
     consultarTurnos = () => {
         var ObjSesion = JSON.parse(localStorage.getItem('Usuario'));
-        let ObjUsuario = ObjSesion.Usuario
+        let ObjUsuario = ObjSesion.Usuario;
         fetch(gsUrlApi + '/turnos/listar/' + ObjUsuario.Empresa, {
             method: 'GET',
             body: JSON.stringify(),
@@ -125,98 +122,106 @@ class DemoTurno extends React.Component {
                 'Content-Type': 'application/json; charset=UTF-8',
                 Accept: 'application/json'
             }
-        }).then(res => res.json())
-            .then(data => data)
+        })
+            .then((res) => res.json())
+            .then((data) => data)
             .then((data) => {
-                if (data.datos.length) { 
-                    this.setState(state => ({
-                        ...state,ArrayTurnos: data.datos
+                if (data.datos.length) {
+                    this.setState((state) => ({
+                        ...state,
+                        ArrayTurnos: data.datos
                     }));
                 }
             })
-            .catch(err => console.log("err", err));
-    }
+            .catch((err) => console.log('err', err));
+    };
 
-    onInputchange = data => {
+    onInputchange = (data) => {
         if (data) {
             let name = data.target.name;
             let value = data.target.value;
-            this.setState(state => ({
-                ...state, [name]: value,
+            this.setState((state) => ({
+                ...state,
+                [name]: value
             }));
         }
-    }
+    };
 
-    onInputchangeFecha = data => {
+    onInputchangeFecha = (data) => {
         if (data) {
             let name = data.target.name;
             let value = data.target.value.substr(0, 11);
             let ArrayTemp = [];
             var dt = new Date(data.target.value);
-            let fechaActual = `${(dt.getMonth() + 1).toString().padStart(2, '0')}/${dt.getDate().toString().padStart(2, '0')}/${dt.getFullYear().toString().padStart(4, '0')} ${dt.getHours().toString().padStart(2, '0')}:${dt.getMinutes().toString().padStart(2, '0')}:${dt.getSeconds().toString().padStart(2, '0')}`
-            this.setState(state => ({
-                ...state, FechaTurnoG: fechaActual.substr(0, 10) + " " + fechaActual.substr(11) + ".000Z"
+            let fechaActual = `${(dt.getMonth() + 1).toString().padStart(2, '0')}/${dt.getDate().toString().padStart(2, '0')}/${dt
+                .getFullYear()
+                .toString()
+                .padStart(4, '0')} ${dt.getHours().toString().padStart(2, '0')}:${dt.getMinutes().toString().padStart(2, '0')}:${dt
+                .getSeconds()
+                .toString()
+                .padStart(2, '0')}`;
+            this.setState((state) => ({
+                ...state,
+                FechaTurnoG: fechaActual.substr(0, 10) + ' ' + fechaActual.substr(11) + '.000Z'
             }));
 
             var FechaInicial = new Date(this.state.ArrayHorarios[0]?.FechaInicial);
             var FechaFinal = new Date(this.state.ArrayHorarios[0]?.FechaFinal);
-            var FechaFinalTime = FechaFinal.getMinutes()
-            var FechaInicialTime = FechaInicial.getMinutes()
-            var diff = FechaFinalTime - FechaInicialTime;
-            console.log("diff-->", diff);
-            console.log("value-->", this.state.duracion);
-            let item = diff / Number(this.state.duracion)
+            var diferencia = FechaFinal.getTime() - FechaInicial.getTime();
+            let diasDeDiferencia = (diferencia / 1000 / 60 / 60 / 24) * 1440;
+
+            console.log('diff-->', diasDeDiferencia);
+            console.log('value-->', this.state.duracion);
+            let item = diasDeDiferencia / Number(this.state.duracion);
             let ciclos = item.toFixed(1).substring(0, 1);
-            console.log("item-->", Number(item));
+            console.log('item-->', Number(item));
             for (const iterator of this.state.ArrayHorarios) {
                 for (let i = 0; i < ciclos; i++) {
                     var currentDateObj = new Date(value + iterator?.FechaInicial.substr(11));
                     var numberOfMlSeconds = currentDateObj.getTime();
-                    var addMlSeconds = this.state.duracion * 60000;
+                    var addMlSeconds = 0;
+                    if (i != 0) {
+                        addMlSeconds = this.state.duracion * 60000 * i;
+                    }
+
                     var d = new Date(numberOfMlSeconds + addMlSeconds);
-                    let dformat = [d.getMonth() + 1,
-                    d.getDate(),
-                    d.getFullYear()].join('/') + ' ' +
-                        [d.getHours(),
-                        d.getMinutes(),
-                        d.getSeconds()].join(':');
+                    let dformat =
+                        [d.getMonth() + 1, d.getDate(), d.getFullYear()].join('/') +
+                        ' ' +
+                        [d.getHours(), d.getMinutes(), d.getSeconds()].join(':');
                     let obj = {};
-                    for (const iterator of this.state.ArrayTurnos) { 
-                        if(dformat == iterator.Hora){
+                    for (const iterator of this.state.ArrayTurnos) {
+                        if (dformat == iterator.Hora) {
                             obj.Estado = true;
                         }
-                        obj.Hora = dformat
+                        obj.Hora = dformat;
                     }
-                    obj.Hora = dformat
-                    ArrayTemp.push(obj)
+                    obj.Hora = dformat;
+                    ArrayTemp.push(obj);
                 }
             }
 
-            
-
-            this.setState(state => ({
-                ...state, ArrayHoras: ArrayTemp,
+            this.setState((state) => ({
+                ...state,
+                ArrayHoras: ArrayTemp
             }));
         }
-    }
+    };
+
     render() {
         return (
             <>
                 <FusePageSimple
                     header={
-                        <HeaderForm
-                            Guardar={() => this.ReservarTurno()}
-                            MostrarFormulario={() => this.props.MostrarFormulario("Cargar")}
-                        />}
-
+                        <HeaderForm Guardar={() => this.ReservarTurno()} MostrarFormulario={() => this.props.MostrarFormulario('Cargar')} />
+                    }
                     content={
                         <>
-                            <div className="ventana" >
+                            <div className="ventana">
                                 <Formsy className="flex flex-col justify-center">
                                     <ModalBody>
-                                        <div className="cardbody" style={{ minHeight: "500px" }}>
+                                        <div className="cardbody" style={{ minHeight: '500px' }}>
                                             <div className="p-10">
-
                                                 <div className="flex col-md-6 -mx-4">
                                                     <TextField
                                                         className="mt-8 mb-16 mx-4"
@@ -253,7 +258,6 @@ class DemoTurno extends React.Component {
                                                             shrink: true
                                                         }}
                                                     />
-
                                                 </div>
                                                 <TablaDisponibles
                                                     ReservarTurno={(row) => this.ReservarTurno(row)}
@@ -268,7 +272,7 @@ class DemoTurno extends React.Component {
                     }
                 />
             </>
-        )
+        );
     }
 }
 

@@ -27,8 +27,9 @@ class Misturnos extends React.Component {
     async componentDidMount() {
         var ObjeSesion = JSON.parse(localStorage.getItem('Usuario'));
         let Empresa = ObjeSesion.Usuario.Empresa;
+        let _id = ObjeSesion.Usuario._id;
 
-        fetch(gsUrlApi + '/turnos/listar/' + Empresa + '/', {
+        fetch(gsUrlApi + '/turnos/listarMisTurno/' + Empresa + '/' + _id + '/', {
             method: 'GET',
             body: JSON.stringify(),
             headers: {

@@ -68,10 +68,12 @@ function FirebaseRegistroTab(props) {
         ObjUsuario.Rol = '6389757429b40122846ae51c';
         ObjUsuario.Login = state.Usuario;
         ObjUsuario.Clave = state.password;
+        ObjUsuario.Celular = state.Celular;
 
-        if (!state.Nombre || !state.Apellido || !state.Usuario || !state.password) {
+        if (!state.Nombre || !state.Apellido || !state.Usuario || !state.password || !state.Celular) {
             alert('Debe llenar todos los campos para completar el registro');
         } else {
+            console.log();
             fetch(gsUrlApi + '/usuarios/insertar/', {
                 method: 'POST',
                 body: JSON.stringify(ObjUsuario),
@@ -134,6 +136,7 @@ function FirebaseRegistroTab(props) {
                     />
                     <TextField
                         id="Celular"
+                        name="Celular"
                         type="number"
                         label="Celular"
                         onChange={handleChange}

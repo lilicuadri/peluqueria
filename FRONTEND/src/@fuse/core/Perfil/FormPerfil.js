@@ -86,6 +86,7 @@ class DemoPerfil extends React.Component {
                 toast.success('Datos Guardado');
             })
             .catch((err) => console.log('err', err));
+        alert('Datos Guardado con exitos');
     };
 
     onClick = () => {
