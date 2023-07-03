@@ -16,8 +16,7 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions } from '@mui/material';
-const rows = [
-];
+const rows = [];
 function ProductsTable(props) {
     const dispatch = useDispatch();
 
@@ -29,29 +28,12 @@ function ProductsTable(props) {
         id: null
     });
 
-    const createSortHandler = property => event => {
+    const createSortHandler = (property) => (event) => {
         handleRequestSort(event, property);
     };
 
-    useEffect(() => {
-        var ObjeSesion = JSON.parse(localStorage.getItem('Usuario'));
-        let Empresa = ObjeSesion.Usuario.Empresa;
+    useEffect(() => {}, [dispatch]);
 
-        fetch(gsUrlApi + '/servicios/listar/' + Empresa + "/", {
-            method: 'GET',
-            body: JSON.stringify(),
-            headers: {
-                'Content-Type': 'application/json; charset=utf-8',
-                'Accept': 'application/json;'
-            }
-        }).then(res => res.json())
-            .then(data => data)
-            .then((data) => {
-                setArrayServicios(data.datos)
-
-            })
-            .catch((err) => console.log("err", err));
-    }, [dispatch]);
     function handleRequestSort(event, property) {
         const id = property;
         let direction = 'desc';
@@ -66,7 +48,7 @@ function ProductsTable(props) {
         });
     }
 
-    const alertaEliminar = item => {
+    const alertaEliminar = (item) => {
         confirmAlert({
             title: 'Eliminar registro',
             message: '¿Desea eliminar el registro seleccionado?',
@@ -74,7 +56,6 @@ function ProductsTable(props) {
                 {
                     label: 'Si',
                     onClick: () => props.Eliminar(item)
-
                 },
                 {
                     label: 'No',
@@ -84,12 +65,10 @@ function ProductsTable(props) {
         });
     };
 
-
     function handleClick(item) {
-        props.MostrarFormulario(item)
+        props.MostrarFormulario(item);
         // props.history.push(`/apps/e-commerce/products/${item.id}/${item.handle}`);
     }
-
 
     function handleChangePage(event, value) {
         setPage(value);
@@ -101,17 +80,16 @@ function ProductsTable(props) {
 
     return (
         <div clasName="cardbody">
-            <div className="w-full flex flex-col" >
+            <div className="w-full flex flex-col">
                 <FuseScrollbars className="flex-grow overflow-x-auto">
-                    {ArrayServicios.map((item, key) => {
+                    {props.DataTable.map((item, key) => {
                         return (
-                            <div className='row'>
-
+                            <div className="row">
                                 <Card sx={{ maxWidth: 1087 }} className="m-auto mb-5">
-                                    <CardActionArea style={{ display: "inline-flex", justifyContent: "space-between" }}>
-                                        <div style={{ display: "inline-flex" }}>
+                                    <CardActionArea style={{ display: 'inline-flex', justifyContent: 'space-between' }}>
+                                        <div style={{ display: 'inline-flex' }}>
                                             <Avatar
-                                                style={{ marginTop: "35px", marginLeft: "26px" }}
+                                                style={{ marginTop: '35px', marginLeft: '26px' }}
                                                 alt="Remy Sharp"
                                                 src="assets/images/avatars/logo.jpg"
                                                 sx={{ width: 56, height: 56 }}
@@ -124,19 +102,22 @@ function ProductsTable(props) {
                                                     {item.detalle_servicio}
                                                 </Typography>
                                                 <Typography gutterBottom variant="h7" component="div">
-                                                    Precio  {": " + item.Precio}
+                                                    Precio {': ' + item.Precio}
                                                 </Typography>
                                             </CardContent>
                                         </div>
 
-
-                                        <CardActions style={{ minWidth: "139px" }}>
-                                            <Button size="small" onClick={() => props.MostrarFormulario(item)} variant="contained" color="primary">
+                                        <CardActions style={{ minWidth: '139px' }}>
+                                            <Button
+                                                size="small"
+                                                onClick={() => props.MostrarFormulario(item)}
+                                                variant="contained"
+                                                color="primary"
+                                            >
                                                 Agendar Turno
                                             </Button>
                                         </CardActions>
                                     </CardActionArea>
-
                                 </Card>
                             </div>
                         );

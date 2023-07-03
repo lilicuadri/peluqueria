@@ -27,8 +27,7 @@ class Turnos extends React.Component {
     async componentDidMount() {
         var ObjeSesion = JSON.parse(localStorage.getItem('Usuario'));
         let Empresa = ObjeSesion.Usuario.Empresa;
-
-        fetch(gsUrlApi + '/turnos/listar/' + Empresa + '/', {
+        fetch(gsUrlApi + '/servicios/listar/' + Empresa + '/', {
             method: 'GET',
             body: JSON.stringify(),
             headers: {

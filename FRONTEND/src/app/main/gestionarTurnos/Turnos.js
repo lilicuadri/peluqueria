@@ -49,8 +49,6 @@ class Turnos extends React.Component {
 
     }
 
-
-
     Consultar = data => {
         let filtro = data.target.value;
         var ObjSesion = JSON.parse(localStorage.getItem('Usuario'));
@@ -70,6 +68,7 @@ class Turnos extends React.Component {
                     ...state, ListaVersiones: data.datos
 
                 }))
+                console.log(data.datos)
             })
             .catch(err => console.log("err", err));
     }

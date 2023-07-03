@@ -15,6 +15,7 @@ import PerfilConfig from 'app/main/perfil/PerfilConfig';
 import Misturnos from 'app/main/misturnos/MisturnosConfig';
 import GestionTurnosConfig from 'app/main/gestionarTurnos/TurnosConfig';
 import ContraseñaConfig from 'app/main/contraseña/contraseñaConfig';
+import ayudaConfig from 'app/main/ayuda/ayudaConfig';
 
 const routeConfigs = [
     LoginConfig,
@@ -29,7 +30,8 @@ const routeConfigs = [
     PerfilConfig,
     Misturnos,
     GestionTurnosConfig,
-    ContraseñaConfig
+    ContraseñaConfig,
+    ayudaConfig
 ];
 
 const routes = [
@@ -93,6 +95,11 @@ const routes = [
         exact: true,
         path: '/contraseña',
         component: () => <Redirect to="/contraseña" />
+    },
+    {
+        exact: true,
+        path: '/ayuda',
+        component: () => <Redirect to="/ayuda" />
     },
     {
         path: '/404',
